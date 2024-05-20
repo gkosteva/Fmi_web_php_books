@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Хост: 127.0.0.1
--- Време на генериране: 19 май 2024 в 15:29
--- Версия на сървъра: 10.4.32-MariaDB
--- Версия на PHP: 8.2.12
+-- Host: localhost
+-- Generation Time: May 20, 2024 at 02:22 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- База данни: `fmi_web`
+-- Database: `fmi_web`
 --
 
 -- --------------------------------------------------------
 
 --
--- Структура на таблица `requests`
+-- Table structure for table `requests`
 --
 
 CREATE TABLE `requests` (
@@ -39,7 +39,7 @@ CREATE TABLE `requests` (
 -- --------------------------------------------------------
 
 --
--- Структура на таблица `upload_file`
+-- Table structure for table `upload_file`
 --
 
 CREATE TABLE `upload_file` (
@@ -63,7 +63,7 @@ CREATE TABLE `upload_file` (
 -- --------------------------------------------------------
 
 --
--- Структура на таблица `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
@@ -79,23 +79,31 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id`, `username`, `email`, `password`, `role`, `is_registered`, `active_uploads_count`, `created_at`, `updated_at`) VALUES
+(1, 'gkosteva', 'gabi@abv.bg', '$2y$10$3XEQ7v3499xuiHcpquROWOqOWO6S4jhc.5ZXAg2DD85YYiunJs7bi', 'REGISTERED_USER', 1, 0, '2024-05-20 09:50:38', '2024-05-20 09:50:38'),
+(2, 'gabi', 'gabi1@abv.bg', '$2y$10$mSKfU36ot249MAdmn58TSe2HcAUzmpBZr01aeQAlmgT7PPtSi3kpq', 'REGISTERED_USER', 1, 0, '2024-05-20 11:10:18', '2024-05-20 11:10:18');
+
+--
 -- Indexes for dumped tables
 --
 
 --
--- Индекси за таблица `requests`
+-- Indexes for table `requests`
 --
 ALTER TABLE `requests`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индекси за таблица `upload_file`
+-- Indexes for table `upload_file`
 --
 ALTER TABLE `upload_file`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индекси за таблица `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
@@ -120,7 +128,7 @@ ALTER TABLE `upload_file`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

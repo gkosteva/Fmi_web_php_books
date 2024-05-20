@@ -10,16 +10,23 @@ session_start();
 $email = $_POST['email'];
 $password = $_POST['password'];
 
+$_SESSION['form_data'] = [
+    'email' => $email,
+    'password' => $password,
+];
+
 // Validations
 if (empty($email) || empty($password)) {
-    echo "Моля попълнете всички полета.";
+    $_SESSION['error'] = "Моля попълнете всички полета.";
+    header("Location: /Fmi_web_php_books/views/login.php");
     exit();
 }
 
 $userService = new UsersRepository();
 $user = $userService->getByEmail($email);
 if (!$user) {
-    echo "Невалидни потребителско име или парола.";
+    $_SESSION['error'] = "Невалидни потребителско име или парола.";
+    header("Location: /Fmi_web_php_books/views/login.php");
     exit();
 }
 
@@ -28,5 +35,7 @@ if (password_verify($password, $storedPassword)) {
     $_SESSION['email'] = $user['email'];
     redirect('../views/home.php');
 } else {
-    echo "Невалидни потребителско име или парола.";
+    $_SESSION['error'] = "Невалидни потребителско име или парола.";
+    header("Location: /Fmi_web_php_books/views/login.php");
+    exit();
 }

@@ -59,3 +59,36 @@ button {
 button:hover {
     background-color: #45a049;
 }
+.error-message {
+    display: none;
+    background-color: #ffdddd;
+    color: #d8000c;
+    border: 1px solid #d8000c;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(216, 0, 12, 0.2);
+    text-align: center;
+    font-size: 14px;
+}
+
+/* Styles for individual error messages */
+.error {
+    color: #d8000c;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.register-link {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.register-link a {
+    color: #007BFF; 
+    text-decoration: none;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}
