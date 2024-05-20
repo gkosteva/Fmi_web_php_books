@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Active pdfs</title>
+    <link rel="stylesheet" href="/public/css/shared.css" />
+    <link rel="stylesheet" href="/active_books/style.css" />
+  </head>
+  <body>
+    <div class="header-container">
+      <h1>My PDF Library</h1>
+      <ul class="header-links">
+        <li><a href="/active_books/index.html">Active Books</a></li>
+        <li><a href="#">My Uploads</a></li>
+        <li><a href="/add_pdf/index.html">Add PDF</a></li>
+        <li><a href="#">Requests</a></li>
+        <li><a href="/html/index.html">Home</a></li>
+      </ul>
+    </div>
+
+    <main>
+      <h1>Book Library</h1>
+
+      <ul id="book-list">
+        <li class="book">
+          <div>
+            <img class="imgBook" src="/widgets/book-covers.jpg" alt="" />
+            <div class="info">
+              <p class="title">Title: Book</p>
+              <p class="author">Author: Nikol</p>
+            </div>
+            <p class="description">Description: The book is talking abaut book covers!!!</p>
+          </div>
+          <p class="daysLeft">Days left: 10</p>
+          <div class="buttons">
+            <button class="finishBook">
+              <a class="pathPDF" href="/path/to/book1.pdf" target="_blank"
+                >Open PDF</a
+              >
+            </button>
+            <button class="finishBook">Finish</button>
+          </div>
+        </li>
+      </ul>
+      <h2 id="noBooks"></h2>
+    </main>
+
+    <script src="/active_books/script.js"></script>
+  </body>
+</html>
