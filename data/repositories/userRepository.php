@@ -43,11 +43,7 @@ class UsersRepository extends Repository
             "email" => $user->email,
             "username" => $user->username,
             "password" => $user->password,
-            "role" => $user->role,
-            "is_registered" => $user->is_registered,
-            "active_uploads_count"=> $user->active_uploads_count,
-            "created_at"=> $user->created_at,
-            "updated_at"=>$user->updated_at
+            "is_registered" => $user->is_registered
         ]);
     }
 }

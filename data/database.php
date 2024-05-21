@@ -7,7 +7,7 @@ class Database
     public function __construct()
     {
         $dbhost = "localhost";
-        $dbName = "fmi_web";
+        $dbName = "fmi_php";
         $userName = "root";
         $userPassword = "";
 

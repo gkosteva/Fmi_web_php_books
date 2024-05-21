@@ -32,6 +32,7 @@ if (!$user) {
 
 $storedPassword = $user['password'];
 if (password_verify($password, $storedPassword)) {
+    $_SESSION['user_id'] = $user['id'];
     $_SESSION['email'] = $user['email'];
     redirect('../views/home.php');
 } else {
