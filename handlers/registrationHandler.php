@@ -71,7 +71,7 @@ if ($user_service->getByEmail($email)) {
 
 // Insert the user data into the database
 $current_date=date('Y-m-d H:i:s');
-$is_successful = $user_service->create(new User($username, $email, $hashed_password,"REGISTERED_USER",true, 0, $current_date, $current_date));
+$is_successful = $user_service->create(new User($username, $email, $hashed_password,true));
 if ($is_successful) {
     unset($_SESSION['form_data']);
     redirect('../index.php');
