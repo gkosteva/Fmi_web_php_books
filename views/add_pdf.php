@@ -26,8 +26,8 @@ $email = $_SESSION['email'];
     <div class="header-container">
         <h1>My PDF Library</h1>
         <ul class="header-links">
-            <li><a href="#">Active Books</a></li>
-            <li><a href="#">My Uploads</a></li>
+            <li><a href="/Fmi_web_php_books/views/active_books.php">Active Books</a></li>
+            <li><a href="/Fmi_web_php_books/views/my_uploads.php">My Uploads</a></li>
             <li><a href="#">Add PDF</a></li>
             <li><a href="#">Requests</a></li>
             <li><a href="/views/home.php">Home</a></li>

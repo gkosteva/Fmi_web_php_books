@@ -20,6 +20,13 @@ $user_id = $_SESSION['user_id'];
 $targetImageDir = '/public/uploads/images/';
 $targerPdfDir = '/public/uploads/pdfs/';
 
+if (!is_dir($targetImageDir)) {
+    mkdir($targetImageDir, 0777, true); 
+}
+if (!is_dir($targetPdfDir)) {
+    mkdir($targetPdfDir, 0777, true); // true for recursive create
+}
+
 $imagePath = $_FILES['image']['tmp_name'];
 $pdfPath = $_FILES['pdf']['tmp_name'];
 
