@@ -11,7 +11,7 @@ class PDFRepository extends Repository
 {
     public function __construct()
     {
-        parent::__construct('PDFs');
+        parent::__construct('pdfs');
     }
 
     public function getPDFByDescr($descript) {
@@ -37,6 +37,11 @@ class PDFRepository extends Repository
 
         return null;
     }
+
+    public function getPDFsByUserId(int $user_id) {
+        return $this->filter($user_id);
+    }
+    
     
     public function create(PDF $pdf) {
         return $this->insert([
