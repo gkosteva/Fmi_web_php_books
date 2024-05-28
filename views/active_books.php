@@ -24,11 +24,12 @@ echo "<script>console.log('Debug Objects: " . $books . "' );</script>";
     <div class="header-container">
         <h1>My PDF Library</h1>
         <ul class="header-links">
-            <li><a href="/Fmi_web_php_books/views/active_books.php">Active Books</a></li>
+            <li><a href="#">Active Books</a></li>
             <li><a href="/Fmi_web_php_books/handlers/myUploadsHandler.php">My Uploads</a></li>
             <li><a href="/Fmi_web_php_books/views/add_pdf.php">Add PDF</a></li>
             <li><a href="/Fmi_web_php_books/views/requests.php">Requests</a></li>
             <li><a href="/Fmi_web_php_books/views/home.php">Home</a></li>
+            <li><a href="/Fmi_web_php_books/index.php">Logout</a></li>
         </ul>
     </div>
 
