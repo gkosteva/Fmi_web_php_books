@@ -33,6 +33,7 @@ $email = $_SESSION['email'];
         <li><a href="/Fmi_web_php_books/views/add_pdf.php">Add PDF</a></li>
         <li><a href="#">Requests</a></li>
         <li><a href="#">Home</a></li>
+        <li><a href="/Fmi_web_php_books/views/logout.php">Logout</a></li>
       </ul>
   </div>
 </body>
