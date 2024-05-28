@@ -31,19 +31,24 @@ document.addEventListener('DOMContentLoaded', () => {
             event.preventDefault();
             area.classList.remove('dragover');
             const files = event.dataTransfer.files;
-            if (files.length && fileType === 'image') {
-                handleFileUpload(uploadIcon, fileMsg, files[0]);
-            } else {
-                fileMsg.textContent = files[0].name;
+            if (files.length) {
+                if (fileType === 'image') {
+                    handleFileUpload(uploadIcon, fileMsg, files[0]);
+                } else {
+                    fileMsg.textContent = files[0].name;
+                }
             }
+            fileInput.files = files;
         });
 
         fileInput.addEventListener('change', () => {
             const files = fileInput.files;
-            if (files.length && fileType === 'image') {
-                handleFileUpload(uploadIcon, fileMsg, files[0]);
-            } else {
-                fileMsg.textContent = files[0].name;
+            if (files.length) {
+                if (fileType === 'image') {
+                    handleFileUpload(uploadIcon, fileMsg, files[0]);
+                } else {
+                    fileMsg.textContent = files[0].name;
+                }
             }
         });
     };

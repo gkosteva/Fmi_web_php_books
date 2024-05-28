@@ -11,7 +11,7 @@ class UsersRepository extends Repository
 {
     public function __construct()
     {
-        parent::__construct('user');
+        parent::__construct('User');
     }
 
     public function getByEmail($email) {

@@ -11,7 +11,7 @@ class PDFRepository extends Repository
 {
     public function __construct()
     {
-        parent::__construct('pdfs');
+        parent::__construct('PDFs');
     }
 
     public function getPDFByDescr($descript) {
@@ -39,7 +39,7 @@ class PDFRepository extends Repository
     }
 
     public function getPDFsByUserId(int $user_id) {
-        return $this->filter($user_id);
+        return $this->filter(['owner' => $user_id]);
     }
     
     
