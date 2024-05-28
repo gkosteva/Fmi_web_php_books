@@ -18,32 +18,42 @@ if (!isset($_SESSION['user_id'])) {
 $user_id = $_SESSION['user_id'];
 
 $targetImageDir = '/public/uploads/images/';
-$targerPdfDir = '/public/uploads/pdfs/';
+$targetPdfDir = '/public/uploads/pdfs/';
 
-if (!is_dir($targetImageDir)) {
-    mkdir($targetImageDir, 0777, true); 
+$baseDir = realpath(__DIR__ . '/..'); // Get the absolute path
+
+if (!is_dir($baseDir . $targetImageDir)) {
+    mkdir($baseDir . $targetImageDir, 0777, true);
 }
-if (!is_dir($targetPdfDir)) {
-    mkdir($targetPdfDir, 0777, true); // true for recursive create
+if (!is_dir($baseDir . $targetPdfDir)) {
+    mkdir($baseDir . $targetPdfDir, 0777, true);
 }
 
 $imagePath = $_FILES['image']['tmp_name'];
 $pdfPath = $_FILES['pdf']['tmp_name'];
 
-$imageFile = $_FILES['image'];
-$pdfFile = $_FILES['pdf'];
+$imageFileName = uniqid() . '-' . basename($_FILES['image']['name']);
+$pdfFileName = uniqid() . '-' . basename($_FILES['pdf']['name']);
 
-$imageFileName = uniqid() . '-' . basename($imageFile['name']);
-$pdfFileName = uniqid() . '-' . basename($pdfFile['name']);
+$targetImagePath = $baseDir . $targetImageDir . $imageFileName;
+$targetPdfPath = $baseDir . $targetPdfDir . $pdfFileName;
 
-$targetImagePath = $targetImageDir . $imageFileName;
-$targetPdfPath = $targerPdfDir . $pdfFileName;
+// Move uploaded files
+if (move_uploaded_file($imagePath, $targetImagePath)) {
+    echo "Image upload successful<br>";
+} else {
+    echo "Image upload failed<br>";
+    echo "move_uploaded_file error: " . error_get_last()['message'] . "<br>";
+    exit();
+}
 
-$image = file_get_contents($imagePath);
-$pdf = file_get_contents($pdfPath);
-
-move_uploaded_file($imagePath, __DIR__ .'/..'. $targetImagePath);
-move_uploaded_file($pdfPath, __DIR__ . '/..' . $targetPdfPath);
+if (move_uploaded_file($pdfPath, $targetPdfPath)) {
+    echo "PDF upload successful<br>";
+} else {
+    echo "PDF upload failed<br>";
+    echo "move_uploaded_file error: " . error_get_last()['message'] . "<br>";
+    exit();
+}
 
 // Handle the form submission
 $title = $_POST['title'];

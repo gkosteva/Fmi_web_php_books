@@ -9,10 +9,10 @@ require_once __DIR__ . '/../../data/models/pdf.php';
 
 use models\ActiveBook;
 
-class ActiveBooksRepository {
+class ActiveBooksRepository extends Repository {
 
     public function __construct() {
-        parent::__construct('user_pdfs');
+        parent::__construct('User_PDFs');
 
     }
 

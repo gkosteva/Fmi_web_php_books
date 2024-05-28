@@ -17,10 +17,10 @@ if (!isset($_SESSION['user_id'])) {
 $user_id = $_SESSION['user_id'];
 
 $pdfRepository = new ActiveBooksRepository();
-$activeBooks = $pdfRepository->getActivePdfsByUserId($user_id);
+$activeBooks = $pdfRepository->getActiveBooksByUserId($user_id);
 
 if (!$activeBooks) {
-    $_SESSION['error']="error loading files"
+    $_SESSION['error']="error loading files";
     exit();
 }
 $sql = "expiration_date < NOW()";

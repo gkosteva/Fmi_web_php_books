@@ -8,8 +8,6 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $uploads = isset($_SESSION['my_uploads']) ? $_SESSION['my_uploads'] : [];
-echo "<script>console.log('Debug Objects: " . $uploads . "' );</script>";
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,14 +16,14 @@ echo "<script>console.log('Debug Objects: " . $uploads . "' );</script>";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Uploads</title>
     <link rel="stylesheet" href="/Fmi_web_php_books/public/css/shared.css">
-    <link rel="stylesheet" href="/Fmi_web_php_books/public/css/addPdf.css">
+    <link rel="stylesheet" href="/Fmi_web_php_books/public/css/myUploads.css">
 </head>
 <body>
 <div class="header-container">
     <h1>My PDF Library</h1>
     <ul class="header-links">
         <li><a href="active_books.php">Active Books</a></li>
-        <li><a href="my_uploads.php">My Uploads</a></li>
+        <li><a href="/Fmi_web_php_books/handlers/myUploadsHandler.php">My Uploads</a></li>
         <li><a href="add_pdf.php">Add PDF</a></li>
         <li><a href="requests.php">Requests</a></li>
         <li><a href="home.php">Home</a></li>
@@ -34,19 +32,27 @@ echo "<script>console.log('Debug Objects: " . $uploads . "' );</script>";
 
 <main>
     <h1>My Uploads</h1>
-    <ul>
+    <ul id="book-list">
         <?php if (count($uploads) > 0): ?>
             <?php foreach ($uploads as $upload): ?>
-                <li>
-                    <img src="<?= htmlspecialchars($upload['image']) ?>" alt="Cover">
-                    <h2><?= htmlspecialchars($upload['title']) ?></h2>
-                    <p><?= htmlspecialchars($upload['description']) ?></p>
-                    <p>Active Users: <?= htmlspecialchars($upload['active_users_count']) ?></p> <!-- Ensure this column exists -->
-                    <a href="<?= htmlspecialchars($upload['pdf_file']) ?>" target="_blank">View PDF</a>
+                <?php
+                    $imageUrl = str_replace('/Applications/XAMPP/xamppfiles/htdocs/', '/', $upload['img']);
+                    $pdfUrl = str_replace('/Applications/XAMPP/xamppfiles/htdocs/', '/', $upload['pdf_file']);
+                ?>
+                <li class="book">
+                    <img src="<?= htmlspecialchars($imageUrl) ?>" alt="Cover" class="imgBook">
+                    <div class="info">
+                        <h2 class="title"><?= htmlspecialchars($upload['title']) ?></h2>
+                        <p class="description"><?= htmlspecialchars($upload['descript']) ?></p>
+                        <p class="author">Active Users: <?= htmlspecialchars($upload['users_allowed_count']) ?></p>
+                    </div>
+                    <div class="buttons">
+                        <a href="<?= htmlspecialchars($pdfUrl) ?>" target="_blank" class="pathPDF">View PDF</a>
+                    </div>
                 </li>
             <?php endforeach; ?>
         <?php else: ?>
-            <p>No uploads available.</p>
+            <p id="noBooks">No uploads available.</p>
         <?php endif; ?>
     </ul>
 </main>

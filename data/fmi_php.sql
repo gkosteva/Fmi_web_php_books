@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 22, 2024 at 01:23 PM
+-- Generation Time: May 28, 2024 at 10:59 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -46,12 +46,7 @@ CREATE TABLE `PDFs` (
 --
 
 INSERT INTO `PDFs` (`id`, `title`, `img`, `pdf_file`, `descript`, `file_path`, `active_period`, `max_users_allowed`, `users_allowed_count`, `is_active`, `owner`) VALUES
-(1, 'test title', '664cb978c9f29-download.jpg', '664cb978c9f3b-8MI0600092.pdf', 'test descrpt', '/Applications/XAMPP/xamppfiles/htdocs/Fmi_web_php_books/handlers/../uploads/pdfs/664cb978c9f3b-8MI0600092.pdf', 7, 2, 0, 1, 3),
-(2, 'test', '/uploads/images/664cbbd96e792-download.jpg', '/uploads/pdfs/664cbbd96f105-8MI0600092.pdf', 'tets ettss', '/uploads/pdfs/664cbbd96f105-8MI0600092.pdf', 7, 3, 0, 1, 3),
-(3, 'TEST', '/Fmi_web_php_book/public/uploads/images/664cbc67e7f0d-download.jpg', '/Fmi_web_php_book/public/uploads/pdfs/664cbc67e8629-8MI0600092.pdf', 'bhbdxbw', '/Fmi_web_php_book/public/uploads/pdfs/664cbc67e8629-8MI0600092.pdf', 7, 2, 0, 1, 3),
-(4, 'aa', '/Fmi_web_php_book/public/uploads/images/664cbde6021f5-download.jpg', '/Fmi_web_php_book/public/uploads/pdfs/664cbde602840-8MI0600092.pdf', 'aa', '/Fmi_web_php_book/public/uploads/pdfs/664cbde602840-8MI0600092.pdf', 7, 2, 0, 1, 3),
-(5, 'iii', '/public/uploads/images/664dd0cd7500d-', '/public/uploads/pdfs/664dd0cd77213-', 'iii', '/public/uploads/pdfs/664dd0cd77213-', 7, 2, 0, 1, 4),
-(6, 'ai', '/public/uploads/images/664dd35d9d212-download.jpg', '/public/uploads/pdfs/664dd35d9d435-8MI0600092.pdf', 'ai', '/public/uploads/pdfs/664dd35d9d435-8MI0600092.pdf', 7, 2, 0, 1, 4);
+(12, 'First Pdf', '/Applications/XAMPP/xamppfiles/htdocs/Fmi_web_php_books/public/uploads/images/66559b24e14b3-images.jpg', '/Applications/XAMPP/xamppfiles/htdocs/Fmi_web_php_books/public/uploads/pdfs/66559b24e14c2-сем.pdf', 'some really short descripition just to have something here. Just statistics things', '/Applications/XAMPP/xamppfiles/htdocs/Fmi_web_php_books/public/uploads/pdfs/66559b24e14c2-сем.pdf', 20, 10, 0, 1, 4);
 
 -- --------------------------------------------------------
 
@@ -144,7 +139,7 @@ ALTER TABLE `User_PDFs`
 -- AUTO_INCREMENT for table `PDFs`
 --
 ALTER TABLE `PDFs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `PDF_Requests`
