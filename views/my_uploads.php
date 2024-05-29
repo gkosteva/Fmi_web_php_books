@@ -6,8 +6,10 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
+$user_id = $_SESSION['user_id'];
 
 $uploads = isset($_SESSION['my_uploads']) ? $_SESSION['my_uploads'] : [];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,15 +18,15 @@ $uploads = isset($_SESSION['my_uploads']) ? $_SESSION['my_uploads'] : [];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Uploads</title>
     <link rel="stylesheet" href="/Fmi_web_php_books/public/css/shared.css">
-    <link rel="stylesheet" href="/Fmi_web_php_books/public/css/myUploads.css">
+    <link rel="stylesheet" href="/Fmi_web_php_books/public/css/activeBook.css">
 </head>
 <body>
 <div class="header-container">
     <h1>My PDF Library</h1>
     <ul class="header-links">
-        <li><a href="active_books.php">Active Books</a></li>
-        <li><a href="/Fmi_web_php_books/handlers/myUploadsHandler.php">My Uploads</a></li>
-        <li><a href="/Fmi_web_php_books/views/add_pdf.php">Add PDF</a></li>
+    <li><a href="/Fmi_web_php_books/handlers/activeBooksHandler.php">Active Books</a></li>
+            <li><a href="/Fmi_web_php_books/handlers/myUploadsHandler.php">My Uploads</a></li>
+       <li><a href="add_pdf.php">Add PDF</a></li>
         <li><a href="requests.php">Requests</a></li>
         <li><a href="home.php">Home</a></li>
         <li><a href="/Fmi_web_php_books/index.php">Logout</a></li>

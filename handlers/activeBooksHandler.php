@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../data/repositories/pdfRepository.php';
+require_once __DIR__ . '/../data/repositories/activePDFsRepository.php';
 require_once __DIR__ . '/../common/httpHelpers.php';
 require_once __DIR__ . '/../data/models/pdf.php';
 
@@ -25,17 +25,16 @@ if (!$activeBooks) {
 }
 $sql = "expiration_date < NOW()";
 
-$books=$pdfRepository->delete($sql);
-$_SESSION['active_books']=$books;
+//$books=$pdfRepository->delete($sql);
+$_SESSION['active_books']=$activeBooks;
 
-$pdf = $result->fetch_assoc();
+//$pdf = $activeBooks->fetch_assoc();
 
 // Define the path to the PDF file
-$pdfPath = __DIR__ . '/path/to/uploads/' . $pdf['file_name'];  // Adjust path as needed
+//$pdfPath = __DIR__ . '/path/to/uploads/' . $pdf['file_name'];  // Adjust path as needed
 
 // Serve the PDF
-header("Content-Type: application/pdf");
-header("Content-Disposition: inline; filename='" . basename($pdfPath) . "'");
-readfile($pdfPath);
-
-exit();
+//header("Content-Type: application/pdf");
+//header("Content-Disposition: inline; filename='" . basename($pdfPath) . "'");
+//readfile($pdfPath);
+redirect('../views/active_books.php');

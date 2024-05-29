@@ -1,20 +1,24 @@
 
 #book-list {
     list-style: none;
-    width: 98%;
+    width: 97%;
+}
+h1{
+    margin-left: 4%;
 }
 .book {
     display: flex;
     width: 95%;
-    padding: 15px 30px;
+    padding: 20px 30px;
     margin-top: 15px;
-    justify-content: space-between;
     align-items: center;
     border-radius: 10px;
     border: #45a049 1px solid;
+    box-shadow: #45a049 2px 2px;
 }
 .imgBook {
-    height: 150px;
+    height: 250px;
+    width: 350px;
 }
 .title {
     font-size: larger;
@@ -27,7 +31,7 @@
     display: flex;
     flex-direction: column;
     padding: 2% 3%;
-    width: 20%;
+    width: 60%;
 }
 .finishBook {
     width: 50%;
@@ -44,17 +48,41 @@
     display: flex;
 }
 .buttons {
-    justify-content: end;
-    width: 10%;
+    justify-content: space-around;
+    width: 20%;
+
+}
+
+.button{
+    box-sizing: border-box;
+    padding:20px 10px;
+    height: 60px;
+    width: 40%;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-align: center;
+
 }
 .pathPDF {
-    color: black;
     text-decoration: none;
+    color: white;
+}
+
+.button:hover{
+    background-color: #037e09;
 }
 .description {
-    margin: 20px;
-    width: 50%;
+    width: 80%;
 }
 .daysLeft {
     width: 10%;
 }
+
+.daysLeft {
+    width: 15%;
+  }

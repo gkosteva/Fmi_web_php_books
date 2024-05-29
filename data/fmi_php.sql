@@ -24,10 +24,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `PDFs`
+-- Table structure for table `pdfs`
 --
 
-CREATE TABLE `PDFs` (
+CREATE TABLE `pdfs` (
   `id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
   `img` varchar(255) DEFAULT NULL,
@@ -42,7 +42,7 @@ CREATE TABLE `PDFs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `PDFs`
+-- Dumping data for table `pdfs`
 --
 
 INSERT INTO `PDFs` (`id`, `title`, `img`, `pdf_file`, `descript`, `file_path`, `active_period`, `max_users_allowed`, `users_allowed_count`, `is_active`, `owner`) VALUES
@@ -103,33 +103,11 @@ CREATE TABLE `User_PDFs` (
 --
 
 --
--- Indexes for table `PDFs`
+-- Indexes for table `pdfs`
 --
-ALTER TABLE `PDFs`
+ALTER TABLE `pdfs`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_owner` (`owner`);
-
---
--- Indexes for table `PDF_Requests`
---
-ALTER TABLE `PDF_Requests`
-  ADD PRIMARY KEY (`request_id`),
-  ADD KEY `user_id` (`user_id`),
-  ADD KEY `pdf_id` (`pdf_id`);
-
---
--- Indexes for table `user`
---
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `User_PDFs`
---
-ALTER TABLE `User_PDFs`
-  ADD PRIMARY KEY (`user_pdf_id`),
-  ADD KEY `user_id` (`user_id`),
-  ADD KEY `pdf_id` (`pdf_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -144,44 +122,18 @@ ALTER TABLE `PDFs`
 --
 -- AUTO_INCREMENT for table `PDF_Requests`
 --
-ALTER TABLE `PDF_Requests`
-  MODIFY `request_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `user`
---
-ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `User_PDFs`
---
-ALTER TABLE `User_PDFs`
-  MODIFY `user_pdf_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `pdfs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `PDFs`
+-- Constraints for table `pdfs`
 --
-ALTER TABLE `PDFs`
+ALTER TABLE `pdfs`
   ADD CONSTRAINT `fk_owner` FOREIGN KEY (`owner`) REFERENCES `user` (`id`);
-
---
--- Constraints for table `PDF_Requests`
---
-ALTER TABLE `PDF_Requests`
-  ADD CONSTRAINT `pdf_requests_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
-  ADD CONSTRAINT `pdf_requests_ibfk_2` FOREIGN KEY (`pdf_id`) REFERENCES `PDFs` (`id`);
-
---
--- Constraints for table `User_PDFs`
---
-ALTER TABLE `User_PDFs`
-  ADD CONSTRAINT `user_pdfs_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
-  ADD CONSTRAINT `user_pdfs_ibfk_2` FOREIGN KEY (`pdf_id`) REFERENCES `PDFs` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

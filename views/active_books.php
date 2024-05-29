@@ -17,13 +17,15 @@ echo "<script>console.log('Debug Objects: " . $books . "' );</script>";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Active Books</title>
-    <link rel="stylesheet" href="/Fmi_web_php_books/public/css/shared.css">
     <link rel="stylesheet" href="/Fmi_web_php_books/public/css/activeBook.css">
+    <link rel="stylesheet" href="/Fmi_web_php_books/public/css/shared.css">
 </head>
 <body>
     <div class="header-container">
         <h1>My PDF Library</h1>
         <ul class="header-links">
+            <li><a href="/Fmi_web_php_books/handlers/activeBooksHandler.php">Active Books</a></li>
+            <li><a href="/Fmi_web_php_books/handlers/myUploadsHandler.php">My Uploads</a></li>
             <li><a href="#">Active Books</a></li>
             <li><a href="/Fmi_web_php_books/handlers/myUploadsHandler.php">My Uploads</a></li>
             <li><a href="/Fmi_web_php_books/views/add_pdf.php">Add PDF</a></li>
@@ -39,20 +41,27 @@ echo "<script>console.log('Debug Objects: " . $books . "' );</script>";
             <?php if (count($books) > 0): ?>
                 <?php foreach ($books as $book): ?>
                     <li class="book">
-                        <img src="<?php echo htmlspecialchars($book['image']); ?>" alt="Cover image for <?php echo htmlspecialchars($book['title']); ?>" class="book-image">
-                        <div class="book-info">
-                            <h3><?php echo htmlspecialchars($book['title']); ?></h3>
-                            <p>Author: <?php echo htmlspecialchars($book['author']); ?></p>
-                            <p><?php echo htmlspecialchars($book['description']); ?></p>
-                            <a href="<?php echo htmlspecialchars($book['pdf_file']); ?>" target="_blank">Read PDF</a>
+                    <div>
+                        <img src="<?= htmlspecialchars($book['img']); ?>" alt="Cover image for <?= htmlspecialchars($book['title']); ?>" class="imgBook">
+                        <div class="info">
+                            <p class="title">Title: <?= htmlspecialchars($book['title']); ?></p>
+                            <p class="author">Author: <?= htmlspecialchars($book['owner']); ?></p>
                         </div>
+                            <p class="description"><?= htmlspecialchars($book['descript']); ?></p>
+                </div>
+                            <p class="daysLeft">Access due: <?= htmlspecialchars($book['access_end_date']); ?></p>
+                            <button class="finishBook">
+                            <a class="pathPDF" href="<?= htmlspecialchars($book['pdf_file']); ?>" target="_blank" class="pathPDF">Read PDF</a>
+                                </div>
+                                <button class="finishBook">Finish</button>
+
                     </li>
                 <?php endforeach; ?>
             <?php else: ?>
-                <li>No active books available.</li>
+                <p id="noBooks">No active books available.</p>
             <?php endif; ?>
         </ul>
-    </main>
+            </main>
 
     <script src="/Fmi_web_php_books/public/js/activeBooks.js"></script>
 </body>

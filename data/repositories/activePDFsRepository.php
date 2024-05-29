@@ -8,6 +8,7 @@ require_once __DIR__ . '/../../data/models/pdf.php';
 
 
 use models\ActiveBook;
+use repositories\Repository;
 
 class ActiveBooksRepository extends Repository {
 
