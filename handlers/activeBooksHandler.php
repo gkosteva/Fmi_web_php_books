@@ -1,14 +1,14 @@
 <?php
-
+require_once __DIR__ . '/../data/repositories/activePDFsRepository.php';
 require_once __DIR__ . '/../data/repositories/pdfRepository.php';
-require_once __DIR__ . '/../common/httpHelpers.php';
-require_once __DIR__ . '/../data/models/pdf.php';
+require_once __DIR__ . '/../data/repositories/userRepository.php';
 
 use repositories\ActiveBooksRepository;
+use repositories\PDFRepository;
+use repositories\UsersRepository;
 
 session_start();
 
-// Check if the user is logged in
 if (!isset($_SESSION['user_id'])) {
     echo json_encode(['error' => 'User not authenticated']);
     exit();
@@ -20,22 +20,20 @@ $pdfRepository = new ActiveBooksRepository();
 $activeBooks = $pdfRepository->getActiveBooksByUserId($user_id);
 
 if (!$activeBooks) {
-    $_SESSION['error']="error loading files";
+    $_SESSION['error'] = "No active books";
+    header("Location: ../views/no_active_books.php");
     exit();
 }
-$sql = "expiration_date < NOW()";
 
-$books=$pdfRepository->delete($sql);
-$_SESSION['active_books']=$books;
+$pdfRepo = new PDFRepository();
+$userRepo = new UsersRepository();
 
-$pdf = $result->fetch_assoc();
+foreach ($activeBooks as &$book) {
+    $book["user_id"] = $userRepo->getUserById($book["user_id"]);
+    $book["pdf_id"] = $pdfRepo->getPDFById($book["pdf_id"]);
+}
 
-// Define the path to the PDF file
-$pdfPath = __DIR__ . '/path/to/uploads/' . $pdf['file_name'];  // Adjust path as needed
-
-// Serve the PDF
-header("Content-Type: application/pdf");
-header("Content-Disposition: inline; filename='" . basename($pdfPath) . "'");
-readfile($pdfPath);
-
+$_SESSION['active_books'] = $activeBooks;
+header("Location: ../views/active_books.php");
 exit();
+?>

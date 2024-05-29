@@ -33,10 +33,10 @@ body {
     text-decoration: underline;
 }
 
-button {
-    display: block;
-    width: 100%;
+.button{
     padding: 10px 0;
+    height: 40px;
+    width: 60px;
     background-color: #4CAF50;
     color: white;
     border: none;

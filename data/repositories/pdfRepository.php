@@ -1,11 +1,12 @@
 <?php
-
 namespace repositories;
-
-use models\PDF;
 
 require_once __DIR__ . '/repository.php';
 require_once __DIR__ . '/../../data/models/pdf.php';
+
+
+use models\PDF;
+use repositories\Repository;
 
 class PDFRepository extends Repository
 {
@@ -38,8 +39,22 @@ class PDFRepository extends Repository
         return null;
     }
 
+    public function getPDFById($id) {
+        $pdfs = $this->filter([
+            "id" => $id
+        ]);
+
+        if ($pdfs) {
+            return $pdfs[0];
+        }
+
+        return null;
+    }
+
     public function getPDFsByUserId(int $user_id) {
-        return $this->filter(['owner' => $user_id]);
+        return $this->filter([
+            "owner"=> $user_id
+        ]);
     }
     
     
