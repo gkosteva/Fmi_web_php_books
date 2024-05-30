@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: May 28, 2024 at 10:59 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Host: 127.0.0.1
+-- Generation Time: May 29, 2024 at 10:50 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,10 +24,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `PDFs`
+-- Table structure for table `pdfs`
 --
 
-CREATE TABLE `PDFs` (
+CREATE TABLE `pdfs` (
   `id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
   `img` varchar(255) DEFAULT NULL,
@@ -42,19 +42,21 @@ CREATE TABLE `PDFs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `PDFs`
+-- Dumping data for table `pdfs`
 --
 
-INSERT INTO `PDFs` (`id`, `title`, `img`, `pdf_file`, `descript`, `file_path`, `active_period`, `max_users_allowed`, `users_allowed_count`, `is_active`, `owner`) VALUES
-(12, 'First Pdf', '/Applications/XAMPP/xamppfiles/htdocs/Fmi_web_php_books/public/uploads/images/66559b24e14b3-images.jpg', '/Applications/XAMPP/xamppfiles/htdocs/Fmi_web_php_books/public/uploads/pdfs/66559b24e14c2-сем.pdf', 'some really short descripition just to have something here. Just statistics things', '/Applications/XAMPP/xamppfiles/htdocs/Fmi_web_php_books/public/uploads/pdfs/66559b24e14c2-сем.pdf', 20, 10, 0, 1, 4);
+INSERT INTO `pdfs` (`id`, `title`, `img`, `pdf_file`, `descript`, `file_path`, `active_period`, `max_users_allowed`, `users_allowed_count`, `is_active`, `owner`) VALUES
+(12, 'First Pdf', '/Applications/XAMPP/xamppfiles/htdocs/Fmi_web_php_books/public/uploads/images/66559b24e14b3-images.jpg', '/Applications/XAMPP/xamppfiles/htdocs/Fmi_web_php_books/public/uploads/pdfs/66559b24e14c2-сем.pdf', 'some really short descripition just to have something here. Just statistics things', '/Applications/XAMPP/xamppfiles/htdocs/Fmi_web_php_books/public/uploads/pdfs/66559b24e14c2-сем.pdf', 20, 10, 0, 1, 4),
+(13, 'italy', 'C:\\xampp\\htdocs\\Fmi_web_php_books/public/uploads/images/6657871d23adc-Italy.jpg', 'C:\\xampp\\htdocs\\Fmi_web_php_books/public/uploads/pdfs/6657871d23ae4-Домашна-работа-4.pdf', 'jnini', 'C:\\xampp\\htdocs\\Fmi_web_php_books/public/uploads/pdfs/6657871d23ae4-Домашна-работа-4.pdf', 7, 5, 0, 1, 4),
+(14, 'sssssss', 'C:\\xampp\\htdocs\\Fmi_web_php_books/public/uploads/images/66578f15e464a-Italy.jpg', 'C:\\xampp\\htdocs\\Fmi_web_php_books/public/uploads/pdfs/66578f15e4652-IntelliEthics_Feedback.pdf', 'ss', 'C:\\xampp\\htdocs\\Fmi_web_php_books/public/uploads/pdfs/66578f15e4652-IntelliEthics_Feedback.pdf', 7, 2, 0, 1, 3);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `PDF_Requests`
+-- Table structure for table `pdf_requests`
 --
 
-CREATE TABLE `PDF_Requests` (
+CREATE TABLE `pdf_requests` (
   `request_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `pdf_id` int(11) NOT NULL,
@@ -87,10 +89,10 @@ INSERT INTO `user` (`id`, `username`, `email`, `password`, `is_registered`) VALU
 -- --------------------------------------------------------
 
 --
--- Table structure for table `User_PDFs`
+-- Table structure for table `user_pdfs`
 --
 
-CREATE TABLE `User_PDFs` (
+CREATE TABLE `user_pdfs` (
   `user_pdf_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `pdf_id` int(11) NOT NULL,
@@ -99,20 +101,28 @@ CREATE TABLE `User_PDFs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Dumping data for table `user_pdfs`
+--
+
+INSERT INTO `user_pdfs` (`user_pdf_id`, `user_id`, `pdf_id`, `access_start_date`, `access_end_date`) VALUES
+(1, 3, 14, '2023-01-01', '2023-01-01'),
+(2, 4, 12, '2023-01-01', '2023-01-01');
+
+--
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `PDFs`
+-- Indexes for table `pdfs`
 --
-ALTER TABLE `PDFs`
+ALTER TABLE `pdfs`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_owner` (`owner`);
 
 --
--- Indexes for table `PDF_Requests`
+-- Indexes for table `pdf_requests`
 --
-ALTER TABLE `PDF_Requests`
+ALTER TABLE `pdf_requests`
   ADD PRIMARY KEY (`request_id`),
   ADD KEY `user_id` (`user_id`),
   ADD KEY `pdf_id` (`pdf_id`);
@@ -124,9 +134,9 @@ ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `User_PDFs`
+-- Indexes for table `user_pdfs`
 --
-ALTER TABLE `User_PDFs`
+ALTER TABLE `user_pdfs`
   ADD PRIMARY KEY (`user_pdf_id`),
   ADD KEY `user_id` (`user_id`),
   ADD KEY `pdf_id` (`pdf_id`);
@@ -136,15 +146,15 @@ ALTER TABLE `User_PDFs`
 --
 
 --
--- AUTO_INCREMENT for table `PDFs`
+-- AUTO_INCREMENT for table `pdfs`
 --
-ALTER TABLE `PDFs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+ALTER TABLE `pdfs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
--- AUTO_INCREMENT for table `PDF_Requests`
+-- AUTO_INCREMENT for table `pdf_requests`
 --
-ALTER TABLE `PDF_Requests`
+ALTER TABLE `pdf_requests`
   MODIFY `request_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -154,34 +164,34 @@ ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `User_PDFs`
+-- AUTO_INCREMENT for table `user_pdfs`
 --
-ALTER TABLE `User_PDFs`
-  MODIFY `user_pdf_id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `user_pdfs`
+  MODIFY `user_pdf_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `PDFs`
+-- Constraints for table `pdfs`
 --
-ALTER TABLE `PDFs`
+ALTER TABLE `pdfs`
   ADD CONSTRAINT `fk_owner` FOREIGN KEY (`owner`) REFERENCES `user` (`id`);
 
 --
--- Constraints for table `PDF_Requests`
+-- Constraints for table `pdf_requests`
 --
-ALTER TABLE `PDF_Requests`
+ALTER TABLE `pdf_requests`
   ADD CONSTRAINT `pdf_requests_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
-  ADD CONSTRAINT `pdf_requests_ibfk_2` FOREIGN KEY (`pdf_id`) REFERENCES `PDFs` (`id`);
+  ADD CONSTRAINT `pdf_requests_ibfk_2` FOREIGN KEY (`pdf_id`) REFERENCES `pdfs` (`id`);
 
 --
--- Constraints for table `User_PDFs`
+-- Constraints for table `user_pdfs`
 --
-ALTER TABLE `User_PDFs`
+ALTER TABLE `user_pdfs`
   ADD CONSTRAINT `user_pdfs_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
-  ADD CONSTRAINT `user_pdfs_ibfk_2` FOREIGN KEY (`pdf_id`) REFERENCES `PDFs` (`id`);
+  ADD CONSTRAINT `user_pdfs_ibfk_2` FOREIGN KEY (`pdf_id`) REFERENCES `pdfs` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
