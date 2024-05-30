@@ -47,7 +47,7 @@ class UsersRepository extends Repository
         ]);
     }
 
-    public function getUserById(int $userId){
+    public function getUserById($userId){
         $users = $this->filter([
             "id" => $userId
         ]);

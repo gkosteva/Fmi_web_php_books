@@ -22,10 +22,8 @@ class ActiveBooksRepository extends Repository {
             "user_id" => $userId
         ]);
 
-        if ($pdfs) {
             return $pdfs;
-        }
-        return [];
+    
     }
 
 }
