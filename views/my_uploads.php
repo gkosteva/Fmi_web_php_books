@@ -16,8 +16,8 @@ $uploads = isset($_SESSION['my_uploads']) ? $_SESSION['my_uploads'] : [];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Uploads</title>
-    <link rel="stylesheet" href="/Fmi_web_php_books/public/css/uploads.css">
     <link rel="stylesheet" href="/Fmi_web_php_books/public/css/shared.css">
+    <link rel="stylesheet" href="/Fmi_web_php_books/public/css/uploads.css">
 </head>
 <body>
 <div class="header-container">
