@@ -58,26 +58,28 @@ h1 {
 .buttons {
   justify-content: space-around;
   width: 20%;
+  justify-self: end;
 }
 
 .button {
-  padding: 30px 30px;
+  padding: 10px;
   height: 60px;
   width: 80px;
   background-color: #4caf50;
   color: white;
   border: none;
+  box-sizing: border-box;
   border-radius: 4px;
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s;
   align-items: center;
+  text-align: center;
 }
 
 .pathPDF {
   text-decoration: none;
   color: white;
-  padding: 10px;
 }
 
 .button:hover {
