@@ -57,16 +57,4 @@ class UsersRepository extends Repository
             "is_registered" => $user->is_registered
         ]);
     }
-
-    public function getUserById($userId){
-        $users = $this->filter([
-            "id" => $userId
-        ]);
-
-        if ($users) {
-            return $users[0];
-        }
-
-        return null;
-    }
 }
