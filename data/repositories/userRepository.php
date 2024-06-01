@@ -38,15 +38,6 @@ class UsersRepository extends Repository
         return null;
     }
 
-    public function create(User $user) {
-        return $this->insert([
-            "email" => $user->email,
-            "username" => $user->username,
-            "password" => $user->password,
-            "is_registered" => $user->is_registered
-        ]);
-    }
-
     public function getUserById($userId){
         $users = $this->filter([
             "id" => $userId
@@ -55,7 +46,15 @@ class UsersRepository extends Repository
         if ($users) {
             return $users[0];
         }
-
         return null;
+    }
+
+    public function create(User $user) {
+        return $this->insert([
+            "email" => $user->email,
+            "username" => $user->username,
+            "password" => $user->password,
+            "is_registered" => $user->is_registered
+        ]);
     }
 }

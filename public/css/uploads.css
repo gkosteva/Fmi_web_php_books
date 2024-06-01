@@ -1,96 +1,98 @@
 #book-list {
-  list-style: none;
-  width: 97%;
-}
+    list-style: none;
+    width: 97%;
+  }
+  
+  h1 {
+    margin-left: 4%;
+  }
+  
+  .book {
+    display: flex;
+    width: 95%;
+    padding: 20px 30px;
+    margin-top: 15px;
+    align-items: center;
+    border-radius: 10px;
+    border: #45a049 1px solid;
+    box-shadow: #45a049 2px 2px;
+  }
+  
+  .imgBook {
+    height: 250px;
+    width: 350px;
+  }
+  
+  .title {
+    font-size: larger;
+  }
+  
+  .author {
+    font-size: medium;
+    opacity: 60%;
+  }
+  
+  .info {
+    display: flex;
+    flex-direction: column;
+    padding: 2% 3%;
+    width: 60%;
+  }
+  
+  .finishBook {
+    width: 50%;
+    color: white;
+    justify-content: end;
+    margin-right: 2%;
+  }
+  #noBooks {
+    opacity: 50%;
+    text-align: center;
+    margin-top: 10%;
+  }
+  
+  .book > div {
+    display: flex;
+  }
+  
+  .buttons {
+    justify-content: space-around;
+    width: 20%;
+    justify-self: end;
+  }
+  
+  .button {
+    padding: 10px;
+    height: 60px;
+    width: 80px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    box-sizing: border-box;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .pathPDF {
+    text-decoration: none;
+    color: white;
+  }
+  
+  .button:hover {
+    background-color: #037e09;
+  }
+  .description {
+    width: 80%;
+  }
+  .daysLeft {
+    width: 10%;
+  }
+  
+  .daysLeft {
+    width: 15%;
+  }
 
-h1 {
-  margin-left: 4%;
-}
-
-.book {
-  display: flex;
-  width: 95%;
-  padding: 20px 30px;
-  margin-top: 15px;
-  align-items: center;
-  border-radius: 10px;
-  border: #45a049 1px solid;
-  box-shadow: #45a049 2px 2px;
-}
-
-.imgBook {
-  height: 250px;
-  width: 350px;
-}
-
-.title {
-  font-size: larger;
-}
-
-.author {
-  font-size: medium;
-  opacity: 60%;
-}
-
-.info {
-  display: flex;
-  flex-direction: column;
-  padding: 2% 3%;
-  width: 60%;
-}
-
-.finishBook {
-  width: 50%;
-  color: white;
-  justify-content: end;
-  margin-right: 2%;
-}
-#noBooks {
-  opacity: 50%;
-  text-align: center;
-  margin-top: 10%;
-}
-
-.book > div {
-  display: flex;
-}
-
-.buttons {
-  justify-content: space-around;
-  width: 20%;
-}
-
-.button {
-  padding: 10px;
-  height: 60px;
-  width: 80px;
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  box-sizing: border-box;
-  border-radius: 4px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  align-items: center;
-  text-align: center;
-}
-
-.pathPDF {
-  text-decoration: none;
-  color: white;
-}
-
-.button:hover {
-  background-color: #037e09;
-}
-.description {
-  width: 80%;
-}
-.daysLeft {
-  width: 10%;
-}
-
-.daysLeft {
-  width: 15%;
-}

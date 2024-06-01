@@ -21,7 +21,7 @@ $activeBooks = $pdfRepository->getActiveBooksByUserId($user_id);
 
 if (!$activeBooks) {
     $_SESSION['error'] = "No active books";
-    header("Location: ../views/no_active_books.php");
+    header("Location: ../views/active_books.php");
     exit();
 }
 

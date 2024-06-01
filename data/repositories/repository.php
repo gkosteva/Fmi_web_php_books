@@ -31,6 +31,13 @@ class Repository
       return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function searchPDFs($query) {
+      $stmt = $this->database->getConnection()->prepare("SELECT * FROM pdfs WHERE title LIKE ? OR descript LIKE ?");
+      $searchTerm = '%' . $query . '%';
+      $stmt->execute([$searchTerm, $searchTerm]);
+      return $stmt->fetchAll();
+  }
+  
     public function filter(Array $data, $operator = "&&")
     {
         $columns = array_keys($data);

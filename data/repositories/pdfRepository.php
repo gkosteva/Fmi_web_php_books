@@ -56,6 +56,12 @@ class PDFRepository extends Repository
             "owner"=> $user_id
         ]);
     }
+
+    public function searchByRegex($patern): array {
+        $array=$this->searchPDFs($patern);
+        return $array;
+
+    }
     
     
     public function create(PDF $pdf) {

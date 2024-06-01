@@ -23,7 +23,7 @@ $books = isset($_SESSION['active_books']) ? $_SESSION['active_books'] : [];
     <div class="header-container">
         <h1>My PDF Library</h1>
         <ul class="header-links">
-            <li><a href="#">Active Books</a></li>
+            <li><a style="text-decoration: underline;" href="#">Active Books</a></li>
             <li><a href="/Fmi_web_php_books/handlers/myUploadsHandler.php">My Uploads</a></li>
             <li><a href="/Fmi_web_php_books/views/add_pdf.php">Add PDF</a></li>
             <li><a href="/Fmi_web_php_books/views/requests.php">Requests</a></li>
@@ -55,7 +55,7 @@ else{
                         <img src="<?= htmlspecialchars($imageUrl); ?>" alt="Cover image for <?= htmlspecialchars($book["pdf_id"]['title']); ?>" class="imgBook">
                         <div class="info">
                             <p class="title">Title: <?= htmlspecialchars($book["pdf_id"]['title']); ?></p>
-                            <p class="author">Author: <?= htmlspecialchars($book["pdf_id"]['owner']); ?></p>
+                            <p class="author">Author: <?= htmlspecialchars($book["user_id"]['username']); ?></p>
                             <p class="description">Description: <?= htmlspecialchars($book["pdf_id"]['descript']); ?></p>
                         </div>
                 </div>
