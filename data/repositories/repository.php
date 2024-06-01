@@ -38,7 +38,6 @@ class Repository
       return $stmt->fetchAll();
   }
   
-
     public function filter(Array $data, $operator = "&&")
     {
         $columns = array_keys($data);

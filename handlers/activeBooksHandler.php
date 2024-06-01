@@ -35,3 +35,5 @@ foreach ($activeBooks as &$book) {
 
 $_SESSION['active_books'] = $activeBooks;
 header("Location: ../views/active_books.php");
+exit();
+?>

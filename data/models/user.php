@@ -2,7 +2,7 @@
 
 namespace models;
 
-class User
+ class User
 {
     public function __construct($username, $email, $password, $is_registered, $id=null)
     {
