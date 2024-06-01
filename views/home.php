@@ -1,8 +1,5 @@
 <?php
 session_start();
-require_once __DIR__ . '/../data/repositories/pdfRepository.php';
-
-use repositories\PDFRepository;
 
 // Check if the user is logged in
 if (!isset($_SESSION['user_id'])) {
@@ -14,26 +11,79 @@ if (!isset($_SESSION['user_id'])) {
 // Retrieve user information from session
 $user_id = $_SESSION['user_id'];
 $email = $_SESSION['email'];
-?>
+$books = $_SESSION['result']??[];
+    ?>
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Home</title>
-        <link rel="stylesheet" href="/Fmi_web_php_books/public/css/shared.css" />
-      </head>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link rel="stylesheet" href="/Fmi_web_php_books/public/css/shared.css" />
+    <link rel="stylesheet" href="/Fmi_web_php_books/public/css/home.css" />
+    <link rel="stylesheet" href="/Fmi_web_php_books/public/css/uploads.css" />
+
+
+</head>
+
 <body>
-<div class="header-container">
-      <h1>My PDF Library</h1>
-      <ul class="header-links">
-        <li><a href="/Fmi_web_php_books/views/active_books.php">Active Books</a></li>
-        <li><a href="/Fmi_web_php_books/handlers/myUploadsHandler.php">My Uploads</a></li>
-        <li><a href="/Fmi_web_php_books/views/add_pdf.php">Add PDF</a></li>
-        <li><a href="#">Requests</a></li>
-        <li><a href="#">Home</a></li>
-        <li><a href="/Fmi_web_php_books/views/logout.php">Logout</a></li>
-      </ul>
-  </div>
+    <div class="header-container">
+        <h1>My PDF Library</h1>
+        <ul class="header-links">
+            <li><a href="/Fmi_web_php_books/handlers/activeBooksHandler.php">Active Books</a></li>
+            <li><a href="/Fmi_web_php_books/handlers/myUploadsHandler.php">My Uploads</a></li>
+            <li><a href="/Fmi_web_php_books/views/add_pdf.php">Add PDF</a></li>
+            <li><a href="#">Requests</a></li>
+            <li><a style="text-decoration: underline;" href="#">Home</a></li>
+            <li><a href="/Fmi_web_php_books/index.php">Logout</a></li>
+        </ul>
+    </div>
+    <div class="search-container">
+        <form id="searchForm" method="POST" action="/Fmi_web_php_books/handlers/searchHandler.php">
+            <input type="text" id="searchQuery" name="searchQuery" placeholder="Search here...">
+            <button type="submit" id="searchButton">Search</button>
+        </form>
+    </div>
+
+
+    <div id="results" class="results-container">
+        <ul id="book-list">
+            <?php if (count($books) > 0): ?>
+                <?php foreach ($books as $book): ?>
+                    <?php
+                    if (substr($book["img"], 0, strlen('/Applications/XAMPP/xamppfiles/htdocs/')) === '/Applications/XAMPP/xamppfiles/htdocs/') {
+                        $imageUrl = str_replace('/Applications/XAMPP/xamppfiles/htdocs/', '/', $book['img']);
+                    } else {
+                        $imageUrl = str_replace('C:\\xampp\\htdocs\\', '/', $book['img']);
+                    }
+                    ?>
+                    <li class="book">
+                            <img src="<?= htmlspecialchars($imageUrl); ?>"
+                                alt="Cover image for <?= htmlspecialchars($book['title']); ?>" class="imgBook">
+                            <div class="info">
+                                <p class="title">Title: <?= htmlspecialchars($book['title']); ?></p>
+                                <p class="author">Author: <?= htmlspecialchars($book['owner']["username"]); ?></p>
+                                <p class="description">Description: <?= htmlspecialchars($book['descript']); ?></p>
+                            </div>
+
+                        <div class="buttons">
+                            <div class="button">
+                               Request PDF
+                            </div>
+                        </div>
+                    </li>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p id="noBooks">No pdfs found</p>
+            <?php endif; ?>
+        </ul>
+        </main>
+    </div>
+
+    <!-- <script src="/Fmi_web_php_books/public/js/search.js"></script> -->
+
 </body>
+
+</html>

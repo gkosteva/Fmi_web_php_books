@@ -31,7 +31,15 @@ class Repository
       return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function filter($data, $operator = "&&")
+    public function searchPDFs($query) {
+      $stmt = $this->database->getConnection()->prepare("SELECT * FROM pdfs WHERE title LIKE ? OR descript LIKE ?");
+      $searchTerm = '%' . $query . '%';
+      $stmt->execute([$searchTerm, $searchTerm]);
+      return $stmt->fetchAll();
+  }
+  
+
+    public function filter(Array $data, $operator = "&&")
     {
         $columns = array_keys($data);
         $placeholders = array_map(function($value) {
@@ -120,17 +128,17 @@ class Repository
       return $this->database->getConnection()->lastInsertId();
     }
 
-    public function delete($conditions): bool {
-      $placeholders = [];
-      $values = [];
-      foreach ($conditions as $column => $value) {
-          $placeholders[] = "$column = ?";
-          $values[] = $value;
-      }
-      $placeholders = implode(' AND ', $placeholders);
-      $sql = "DELETE FROM $this->tableName WHERE $placeholders";
-      $stmt = $this->database->getConnection()->prepare($sql);
+  //   public function delete($conditions): bool {
+  //     $placeholders = [];
+  //     $values = [];
+  //     foreach ($conditions as $column => $value) {
+  //         $placeholders[] = "$column = ?";
+  //         $values[] = $value;
+  //     }
+  //     $placeholders = implode(' AND ', $placeholders);
+  //     $sql = "DELETE FROM $this->tableName WHERE $placeholders";
+  //     $stmt = $this->database->getConnection()->prepare($sql);
       
-      return $stmt->execute($values);
-  }
+  //     return $stmt->execute($values);
+  // }
 }

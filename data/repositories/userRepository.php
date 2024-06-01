@@ -38,6 +38,18 @@ class UsersRepository extends Repository
         return null;
     }
 
+    public function getUserById( $userId){
+        $users = $this->filter([
+            "id" => $userId
+        ]);
+
+        if ($users) {
+            return $users[0];
+        }
+
+        return null;
+    }
+
     public function create(User $user) {
         return $this->insert([
             "email" => $user->email,
