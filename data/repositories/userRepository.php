@@ -38,7 +38,7 @@ class UsersRepository extends Repository
         return null;
     }
 
-    public function getUserById( $userId){
+    public function getUserById($userId){
         $users = $this->filter([
             "id" => $userId
         ]);
@@ -46,7 +46,6 @@ class UsersRepository extends Repository
         if ($users) {
             return $users[0];
         }
-
         return null;
     }
 
