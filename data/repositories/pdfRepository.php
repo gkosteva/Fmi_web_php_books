@@ -60,6 +60,7 @@ class PDFRepository extends Repository
     public function searchByRegex($patern): array {
         $array=$this->searchPDFs($patern);
         return $array;
+
     }
     
     
