@@ -11,8 +11,8 @@ if (!isset($_SESSION['user_id'])) {
 // Retrieve user information from session
 $user_id = $_SESSION['user_id'];
 $email = $_SESSION['email'];
-$books = $_SESSION['result']??[];
-    ?>
+$books = $_SESSION['result'] ?? [];
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -51,32 +51,34 @@ $books = $_SESSION['result']??[];
     <div id="results" class="results-container">
         <ul id="book-list">
             <?php if (count($books) > 0): ?>
-                <?php foreach ($books as $book): ?>
-                    <?php
-                    if (substr($book["img"], 0, strlen('/Applications/XAMPP/xamppfiles/htdocs/')) === '/Applications/XAMPP/xamppfiles/htdocs/') {
-                        $imageUrl = str_replace('/Applications/XAMPP/xamppfiles/htdocs/', '/', $book['img']);
-                    } else {
-                        $imageUrl = str_replace('C:\\xampp\\htdocs\\', '/', $book['img']);
-                    }
-                    ?>
-                    <li class="book">
-                            <img src="<?= htmlspecialchars($imageUrl); ?>"
-                                alt="Cover image for <?= htmlspecialchars($book['title']); ?>" class="imgBook">
-                            <div class="info">
-                                <p class="title">Title: <?= htmlspecialchars($book['title']); ?></p>
-                                <p class="author">Author: <?= htmlspecialchars($book['owner']["username"]); ?></p>
-                                <p class="description">Description: <?= htmlspecialchars($book['descript']); ?></p>
-                            </div>
+                    <?php foreach ($books as $book): ?>
+                            <?php
+                            if (substr($book["img"], 0, strlen('/Applications/XAMPP/xamppfiles/htdocs/')) === '/Applications/XAMPP/xamppfiles/htdocs/') {
+                                $imageUrl = str_replace('/Applications/XAMPP/xamppfiles/htdocs/', '/', $book['img']);
+                            } else {
+                                $imageUrl = str_replace('C:\\xampp\\htdocs\\', '/', $book['img']);
+                            }
+                            ?>
+                            <li class="book">
+                                    <img src="<?= htmlspecialchars($imageUrl); ?>"
+                                        alt="Cover image for <?= htmlspecialchars($book['title']); ?>" class="imgBook">
+                                    <div class="info">
+                                        <p class="title">Title: <?= htmlspecialchars($book['title']); ?></p>
+                                        <p class="author">Author: <?= htmlspecialchars($book['owner']["username"]); ?></p>
+                                        <p class="description">Description: <?= htmlspecialchars($book['descript']); ?></p>
+                                    </div>
 
-                        <div class="buttons">
-                            <div class="button">
-                               Request PDF
-                            </div>
-                        </div>
-                    </li>
-                <?php endforeach; ?>
+                                <div class="buttons">
+                                    <?php if ($book['owner']['id'] != $user_id): ?>
+                                 <div class="button">
+                                       Request PDF
+                                    </div>
+                                    <?php endif; ?>
+                                </div>
+                            </li>
+                    <?php endforeach; ?>
             <?php else: ?>
-                <p id="noBooks">No pdfs found</p>
+                    <p id="noBooks">No pdfs found</p>
             <?php endif; ?>
         </ul>
         </main>
