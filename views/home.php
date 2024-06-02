@@ -81,7 +81,6 @@ $books = $_SESSION['result'] ?? [];
                     <p id="noBooks">No pdfs found</p>
             <?php endif; ?>
         </ul>
-        </main>
     </div>
 
     <!-- <script src="/Fmi_web_php_books/public/js/search.js"></script> -->
