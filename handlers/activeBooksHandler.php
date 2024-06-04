@@ -31,9 +31,9 @@ $userRepo = new UsersRepository();
 foreach ($activeBooks as &$book) {
     $book["user_id"] = $userRepo->getUserById($book["user_id"]);
     $book["pdf_id"] = $pdfRepo->getPDFById($book["pdf_id"]);
+    $book["owner_id"] = $userRepo->getUserById($book["owner_id"]);
 }
 
 $_SESSION['active_books'] = $activeBooks;
 header("Location: ../views/active_books.php");
 exit();
-?>

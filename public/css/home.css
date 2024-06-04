@@ -38,3 +38,8 @@ button:hover{
     padding: 10px;
     border-bottom: 1px solid #eee;
 }
+
+#err{
+    color: #4CAF50;
+    text-align: center;
+}

@@ -15,7 +15,8 @@ class PDFRepository extends Repository
         parent::__construct('PDFs');
     }
 
-    public function getPDFByDescr($descript) {
+    public function getPDFByDescr($descript)
+    {
         $pdfs = $this->filter([
             "descript" => $descript
         ]);
@@ -27,7 +28,8 @@ class PDFRepository extends Repository
         return null;
     }
 
-    public function getPDFByTitle($title) {
+    public function getPDFByTitle($title)
+    {
         $pdfs = $this->filter([
             "title" => $title
         ]);
@@ -39,7 +41,17 @@ class PDFRepository extends Repository
         return null;
     }
 
-    public function getPDFById($id) {
+    public function updatePDFCountUsers($id, $data, $column)
+    {
+        return $this->update(
+            $id,
+            $data,
+            $column
+        );
+    }
+
+    public function getPDFById($id)
+    {
         $pdfs = $this->filter([
             "id" => $id
         ]);
@@ -51,20 +63,23 @@ class PDFRepository extends Repository
         return null;
     }
 
-    public function getPDFsByUserId(int $user_id) {
+    public function getPDFsByUserId( $user_id)
+    {
         return $this->filter([
-            "owner"=> $user_id
+            "owner" => $user_id
         ]);
     }
 
-    public function searchByRegex($patern): array {
-        $array=$this->searchPDFs($patern);
+    public function searchByRegex($patern): array
+    {
+        $array = $this->searchPDFs($patern);
         return $array;
 
     }
-    
-    
-    public function create(PDF $pdf) {
+
+
+    public function create(PDF $pdf)
+    {
         return $this->insert([
             "title" => $pdf->title,
             "img" => $pdf->img,
@@ -73,9 +88,9 @@ class PDFRepository extends Repository
             "file_path" => $pdf->file_path,
             "active_period" => $pdf->active_period,
             "max_users_allowed" => $pdf->max_users_allowed,
-            "users_allowed_count"=> $pdf->users_allowed_count,
+            "users_allowed_count" => $pdf->users_allowed_count,
             "is_active" => true,
-            "owner"=> $pdf->owner
+            "owner" => $pdf->owner
         ]);
     }
 
