@@ -38,3 +38,4 @@ foreach ($results as &$book) {
 $_SESSION['result'] = $results;
 
 header("Location: ../views/home.php");
+exit();

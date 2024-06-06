@@ -2,21 +2,22 @@
 
 namespace models;
 
-class ActivePDF {
-    private $id;
-    private $userId;
-    private $pdfId;
-    private $isActive;
-    private $createdAt;
-    private $expiresAt;
+class ActivePDF
+{
+    public $id;
+    public $userId;
+    public $pdfId;
+    public $isActive;
+    public $createdAt;
+    public $expiresAt;
 
-    public function __construct($id, $userId, $pdfId, $isActive, $createdAt, $expiresAt) {
+    public function __construct($userId, $pdfId, $createdAt, $expiresAt, $id = null)
+    {
         $this->id = $id;
         $this->userId = $userId;
         $this->pdfId = $pdfId;
-        $this->isActive = $isActive;
         $this->createdAt = $createdAt;
         $this->expiresAt = $expiresAt;
     }
 
-   }
+}

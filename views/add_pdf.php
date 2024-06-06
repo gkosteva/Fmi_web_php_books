@@ -29,7 +29,7 @@ $email = $_SESSION['email'];
         <li><a href="/Fmi_web_php_books/handlers/activeBooksHandler.php">Active Books</a></li>
             <li><a href="/Fmi_web_php_books/handlers/myUploadsHandler.php">My Uploads</a></li>
             <li><a style="text-decoration: underline;" href="#">Add PDF</a></li>
-            <li><a href="#">Requests</a></li>
+            <li><a href="/Fmi_web_php_books/handlers/requestUploadHandler.php">Requests</a></li>
             <li><a href="/Fmi_web_php_books/views/home.php">Home</a></li>
             <li><a href="/Fmi_web_php_books/index.php">Logout</a></li>
         </ul>
@@ -108,7 +108,7 @@ $email = $_SESSION['email'];
                     <option value="30">30</option>
                 </select>
             </div>
-            <button type="submit">Submit</button>
+            <button class="fake-btn" type="submit">Submit</button>
         </form>
     </div>
     <script src="/Fmi_web_php_books/public/js/addPdfScripts.js"></script>
