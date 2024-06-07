@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 06, 2024 at 10:54 AM
+-- Generation Time: Jun 07, 2024 at 03:16 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -46,10 +46,10 @@ CREATE TABLE `pdfs` (
 --
 
 INSERT INTO `pdfs` (`id`, `title`, `img`, `pdf_file`, `descript`, `file_path`, `active_period`, `max_users_allowed`, `users_allowed_count`, `is_active`, `owner`) VALUES
-(12, 'First Pdf', '/Applications/XAMPP/xamppfiles/htdocs/Fmi_web_php_books/public/uploads/images/66559b24e14b3-images.jpg', '/Applications/XAMPP/xamppfiles/htdocs/Fmi_web_php_books/public/uploads/pdfs/66559b24e14c2-сем.pdf', 'some really short descripition just to have something here. Just statistics things', '/Applications/XAMPP/xamppfiles/htdocs/Fmi_web_php_books/public/uploads/pdfs/66559b24e14c2-сем.pdf', 20, 10, 1, 1, 4),
-(13, 'italy', 'C:\\xampp\\htdocs\\Fmi_web_php_books/public/uploads/images/6657871d23adc-Italy.jpg', 'C:\\xampp\\htdocs\\Fmi_web_php_books/public/uploads/pdfs/6657871d23ae4-Домашна-работа-4.pdf', 'jnini', 'C:\\xampp\\htdocs\\Fmi_web_php_books/public/uploads/pdfs/6657871d23ae4-Домашна-работа-4.pdf', 7, 5, 4, 1, 4),
+(12, 'First Pdf', '/Applications/XAMPP/xamppfiles/htdocs/Fmi_web_php_books/public/uploads/images/66559b24e14b3-images.jpg', '/Applications/XAMPP/xamppfiles/htdocs/Fmi_web_php_books/public/uploads/pdfs/66559b24e14c2-сем.pdf', 'some really short descripition just to have something here. Just statistics things', '/Applications/XAMPP/xamppfiles/htdocs/Fmi_web_php_books/public/uploads/pdfs/66559b24e14c2-сем.pdf', 20, 10, 7, 1, 4),
+(13, 'italy', 'C:\\xampp\\htdocs\\Fmi_web_php_books/public/uploads/images/6657871d23adc-Italy.jpg', 'C:\\xampp\\htdocs\\Fmi_web_php_books/public/uploads/pdfs/6657871d23ae4-Домашна-работа-4.pdf', 'jnini', 'C:\\xampp\\htdocs\\Fmi_web_php_books/public/uploads/pdfs/6657871d23ae4-Домашна-работа-4.pdf', 7, 5, 22, 1, 4),
 (14, 'sssssss', 'C:\\xampp\\htdocs\\Fmi_web_php_books/public/uploads/images/66578f15e464a-Italy.jpg', 'C:\\xampp\\htdocs\\Fmi_web_php_books/public/uploads/pdfs/66578f15e4652-IntelliEthics_Feedback.pdf', 'ss', 'C:\\xampp\\htdocs\\Fmi_web_php_books/public/uploads/pdfs/66578f15e4652-IntelliEthics_Feedback.pdf', 7, 2, 2, 1, 3),
-(18, 'MyUpload', '/Applications/XAMPP/xamppfiles/htdocs/Fmi_web_php_books/public/uploads/images/6660a9897edfd-images.jpeg', '/Applications/XAMPP/xamppfiles/htdocs/Fmi_web_php_books/public/uploads/pdfs/6660a9897ee60-8MI0600092.pdf', 'try to request', '/Applications/XAMPP/xamppfiles/htdocs/Fmi_web_php_books/public/uploads/pdfs/6660a9897ee60-8MI0600092.pdf', 8, 3, 0, 1, 5);
+(18, 'MyUpload', '/Applications/XAMPP/xamppfiles/htdocs/Fmi_web_php_books/public/uploads/images/6660a9897edfd-images.jpeg', '/Applications/XAMPP/xamppfiles/htdocs/Fmi_web_php_books/public/uploads/pdfs/6660a9897ee60-8MI0600092.pdf', 'try to request', '/Applications/XAMPP/xamppfiles/htdocs/Fmi_web_php_books/public/uploads/pdfs/6660a9897ee60-8MI0600092.pdf', 8, 3, 2, 1, 5);
 
 -- --------------------------------------------------------
 
@@ -69,25 +69,48 @@ CREATE TABLE `pdf_requests` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `pdf_requests_unregistered`
+--
+
+CREATE TABLE `pdf_requests_unregistered` (
+  `id` int(11) NOT NULL,
+  `user_email` varchar(255) NOT NULL,
+  `pdf_id` int(11) NOT NULL,
+  `request_date` datetime NOT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  `owner_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `pdf_requests_unregistered`
+--
+
+INSERT INTO `pdf_requests_unregistered` (`id`, `user_email`, `pdf_id`, `request_date`, `status`, `owner_id`) VALUES
+(11, 'gkosteva@uni-sofia.bg', 18, '2024-06-07 00:00:00', 'approved', 5),
+(12, 'gkosteva@uni-sofia.bg', 13, '2024-06-07 00:00:00', 'declined', 4);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tokens`
 --
 
 CREATE TABLE `tokens` (
   `id` int(11) NOT NULL,
   `token` varchar(32) NOT NULL,
-  `expiration_date` datetime NOT NULL
+  `expiration_date` datetime NOT NULL,
+  `user_email` varchar(255) NOT NULL,
+  `pdf_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tokens`
 --
 
-INSERT INTO `tokens` (`id`, `token`, `expiration_date`) VALUES
-(1, 'd647adff4c24344d1cc70c50154dd476', '2024-06-08 14:59:14'),
-(2, 'cea995eb238e17b3807abcb03f4032db', '2024-06-08 14:59:16'),
-(3, '685eb7b7f1a60d3cb8a86a0208187d1b', '2024-06-09 15:08:05'),
-(4, '8c306c84827124616d5175c62b9d1c07', '2024-06-09 15:54:49'),
-(5, '264413776354f0f76bd0b5be66f112cb', '2024-06-09 16:08:21');
+INSERT INTO `tokens` (`id`, `token`, `expiration_date`, `user_email`, `pdf_id`) VALUES
+(24, '99c122c9934dda86948e3ed40cd9b322', '2024-06-14 14:12:35', 'gkosteva@uni-sofia.bg', 13),
+(25, '12a22a7818688567afedec548ca0809d', '2024-06-14 15:03:40', 'gkosteva@uni-sofia.bg', 12),
+(26, '243a1e93d4e009eb539179abdd8851e0', '2024-06-14 15:09:53', 'gkosteva@uni-sofia.bg', 18);
 
 -- --------------------------------------------------------
 
@@ -153,10 +176,19 @@ ALTER TABLE `pdf_requests`
   ADD KEY `fk_owner_id` (`owner_id`);
 
 --
+-- Indexes for table `pdf_requests_unregistered`
+--
+ALTER TABLE `pdf_requests_unregistered`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `pdf_id` (`pdf_id`),
+  ADD KEY `owner_id` (`owner_id`);
+
+--
 -- Indexes for table `tokens`
 --
 ALTER TABLE `tokens`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `pdf_id` (`pdf_id`);
 
 --
 -- Indexes for table `user`
@@ -189,10 +221,16 @@ ALTER TABLE `pdf_requests`
   MODIFY `request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `pdf_requests_unregistered`
+--
+ALTER TABLE `pdf_requests_unregistered`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
 -- AUTO_INCREMENT for table `tokens`
 --
 ALTER TABLE `tokens`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -222,6 +260,19 @@ ALTER TABLE `pdfs`
 ALTER TABLE `pdf_requests`
   ADD CONSTRAINT `fk_owner_id` FOREIGN KEY (`owner_id`) REFERENCES `user` (`id`),
   ADD CONSTRAINT `fk_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+
+--
+-- Constraints for table `pdf_requests_unregistered`
+--
+ALTER TABLE `pdf_requests_unregistered`
+  ADD CONSTRAINT `pdf_requests_unregistered_ibfk_1` FOREIGN KEY (`pdf_id`) REFERENCES `pdfs` (`id`),
+  ADD CONSTRAINT `pdf_requests_unregistered_ibfk_2` FOREIGN KEY (`owner_id`) REFERENCES `user` (`id`);
+
+--
+-- Constraints for table `tokens`
+--
+ALTER TABLE `tokens`
+  ADD CONSTRAINT `tokens_ibfk_1` FOREIGN KEY (`pdf_id`) REFERENCES `pdfs` (`id`);
 
 --
 -- Constraints for table `user_pdfs`

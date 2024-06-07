@@ -30,6 +30,7 @@ $email = $_SESSION['email'];
             <li><a href="/Fmi_web_php_books/handlers/myUploadsHandler.php">My Uploads</a></li>
             <li><a style="text-decoration: underline;" href="#">Add PDF</a></li>
             <li><a href="/Fmi_web_php_books/handlers/requestUploadHandler.php">Requests</a></li>
+            <li><a href="/Fmi_web_php_books/handlers/guestRequestUploadHandler.php">Guest requests</a></li>
             <li><a href="/Fmi_web_php_books/views/home.php">Home</a></li>
             <li><a href="/Fmi_web_php_books/index.php">Logout</a></li>
         </ul>

@@ -85,12 +85,7 @@ class Repository
   {
     $command = "UPDATE $this->tableName SET $column=$data WHERE id=$id";
     $query = $this->database->getConnection()->prepare($command);
-    $index = 0;
-    // foreach ($data  as $key => $value) {
-    //   $index++;
-    //   $query->bindValue($index, $value);
-    // }
-
+    
     return $query->execute();
   }
 
