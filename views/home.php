@@ -12,9 +12,6 @@ if (!isset($_SESSION['user_id'])) {
 $user_id = $_SESSION['user_id'];
 $email = $_SESSION['email'];
 $books = $_SESSION['result'] ?? [];
-
-$err = $_SESSION["errorReq"] ?? "";
-
 ?>
 
 <!DOCTYPE html>
@@ -37,6 +34,7 @@ $err = $_SESSION["errorReq"] ?? "";
             <li><a href="/Fmi_web_php_books/handlers/myUploadsHandler.php">My Uploads</a></li>
             <li><a href="/Fmi_web_php_books/views/add_pdf.php">Add PDF</a></li>
             <li><a href="/Fmi_web_php_books/handlers/requestUploadHandler.php">Requests</a></li>
+            <li><a href="/Fmi_web_php_books/handlers/guestRequestUploadHandler.php">Guest requests</a></li>
             <li><a style="text-decoration: underline;" href="#">Home</a></li>
             <li><a href="/Fmi_web_php_books/index.php">Logout</a></li>
         </ul>
@@ -73,7 +71,7 @@ $err = $_SESSION["errorReq"] ?? "";
                             <?php if ($book['owner']['id'] != $user_id): ?>
                                 <div class="button">
                                     <a class="pathPDF"
-                                        href='/Fmi_web_php_books/handlers/requestHandler.php?pdfId=<?= htmlspecialchars($book['id']); ?>&userId=<?= htmlspecialchars($user_id); ?>&ownerId=<?= htmlspecialchars($book["owner"]['id']); ?>'>Request
+                                        href='/Fmi_web_php_books/handlers/requestHandler.php?pdfId=<?= htmlspecialchars($book['id']); ?>&userId=<?= htmlspecialchars($user_id); ?>&ownerId=<?= htmlspecialchars($book["owner"]['id']); ?>'></a>Request
                                         PDF</a>
                                 <?php endif; ?>
                             </div>

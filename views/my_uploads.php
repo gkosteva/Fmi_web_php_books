@@ -27,6 +27,7 @@ $uploads = isset($_SESSION['my_uploads']) ? $_SESSION['my_uploads'] : [];
             <li><a style="text-decoration: underline;" href="/Fmi_web_php_books/handlers/myUploadsHandler.php">My Uploads</a></li>
        <li><a href="add_pdf.php">Add PDF</a></li>
        <li><a href="/Fmi_web_php_books/handlers/requestUploadHandler.php">Requests</a></li>
+       <li><a href="/Fmi_web_php_books/handlers/guestRequestUploadHandler.php">Guest requests</a></li>
         <li><a href="home.php">Home</a></li>
         <li><a href="/Fmi_web_php_books/index.php">Logout</a></li>
     </ul>
