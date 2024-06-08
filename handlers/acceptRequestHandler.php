@@ -46,6 +46,11 @@ if (isset($_GET['requestId'])) {
     $active = new ActivePDF($request["user_id"], $request["pdf_id"], date("Y-m-d"), $dateExpire);
 
 
+    if ($pdf["users_allowed_count"] >= $pdf["max_users_allowed"]) {
+        $_SESSION["err"] = "You cannot approve this request right now. Max count of active users reached!";
+        header("Location: /Fmi_web_php_books/views/requests.php");
+        exit();
+    }
     $success = $activeBookRepository->create($active);
 
     if ($success) {

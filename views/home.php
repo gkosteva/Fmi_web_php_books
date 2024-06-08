@@ -84,13 +84,15 @@ foreach ($statisticsData as $data) {
             <button type="submit" id="searchButton">Search</button>
         </form>
     </div>
-    <div id="chartContainer"></div>
-    <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+
     <?php if ($error != '') {
         echo "<h3 id='err' style='color:red;'>$error</h3>";
     } else {
         echo "<h3 id='err'>$msg</h3>";
     } ?>
+    
+        <div id="chartContainer"></div>
+
     <div id="results" class="results-container">
         <ul id="book-list">
             <?php if (count($books) > 0): ?>
@@ -127,6 +129,9 @@ foreach ($statisticsData as $data) {
             <?php endif; ?>
         </ul>
     </div>
+
+    <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+
 </body>
 
 </html>
