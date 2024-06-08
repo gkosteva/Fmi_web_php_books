@@ -59,8 +59,8 @@ if (isset($_GET['requestId'])) {
         $mail->Body = "Your request for the pdf \"$pdfName\" has been declined!";
 
         $mail->send();
-        echo "<script>alert('Successfully declined!');</script>";
 
+        $_SESSION["msg"]="Successfully declined!";
     } catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }

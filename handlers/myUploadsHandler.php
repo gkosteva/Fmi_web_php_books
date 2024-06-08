@@ -18,8 +18,7 @@ $pdfRepository = new PDFRepository();
 // Fetch all uploads made by the user
 $uploads = $pdfRepository->getPDFsByUserId($user_id);
 
-$_SESSION['my_uploads'] = $uploads;
+$_SESSION['myUploads'] = $uploads;
 
-// Redirect to the my_uploads page (if necessary, or this script can be part of the my_uploads page itself)
-redirect("../views/my_uploads.php");
+redirect("../views/myUploads.php");
 exit();

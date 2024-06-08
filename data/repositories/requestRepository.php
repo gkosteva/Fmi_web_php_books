@@ -57,9 +57,7 @@ class RequestRepository extends Repository
         if($pdf){
             return $pdf[0];
         }
-        else {
-            return null;
-        }
+        return null;
     }
 
     public function addRequest($pdf): bool

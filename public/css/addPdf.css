@@ -12,7 +12,7 @@
     margin-bottom: 20px;
 }
 
-.form-group label {
+.form-group label, button {
     display: block;
     margin-bottom: 8px;
     font-weight: bold;
@@ -54,7 +54,7 @@
     margin-bottom: 10px;
 }
 
-.file-drop-area .fake-btn {
+.fake-btn {
     background-color: #4CAF50;
     color: white;
     padding: 8px 15px;
@@ -80,4 +80,10 @@
     width: 100%;
     cursor: pointer;
     opacity: 0;
+}
+
+button{
+    border: none;
+    margin-left: 40%;
+    font-size: 16px;
 }

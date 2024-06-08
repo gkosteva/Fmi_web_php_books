@@ -3,6 +3,8 @@ session_start();
 $errorMessage = isset($_SESSION['error']) ? $_SESSION['error'] : '';
 $formData = isset($_SESSION['form_data']) ? $_SESSION['form_data'] : ['email' => '', 'password' => ''];
 unset($_SESSION['error']);
+unset($_SESSION['form_data']);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,6 +34,6 @@ unset($_SESSION['error']);
             <p>You don't have an account? <a href="/Fmi_web_php_books/views/registration.php">Register here</a></p>
         </div>
     </div>
-    <script src="/Fmi_web_php_books/public/js/loginAndRegistrationErrorHandling.js"></script>
+    <script src="/Fmi_web_php_books/public/js/z.js"></script>
 </body>
 </html>

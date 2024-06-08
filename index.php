@@ -38,6 +38,11 @@ foreach ($selected_pdfs as &$pdf) {
     $pdf["owner_email"] = $owner['email'];
 }
 
+$msg = $_SESSION['msg'] ?? '';
+$error = $_SESSION["err"] ?? '';
+
+unset($_SESSION['msg']);
+unset($_SESSION['err']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -64,6 +69,12 @@ foreach ($selected_pdfs as &$pdf) {
         You are not logged in. You can only read PDFs accessed via email links, which expire after 7 days. To use all
         features of this site, please log in or register.
     </div>
+    
+    <?php if ($error != '') {
+        echo "<h3 id='err' style='color:red;'>$error</h3>";
+    } else {
+        echo "<h3 id='err'>$msg</h3>";
+    } ?>
 
     <div id="results" class="results-container">
         <ul id="book-list">

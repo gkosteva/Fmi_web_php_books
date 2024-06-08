@@ -9,7 +9,6 @@ require_once __DIR__ . '/../data/models/request.php';
 require_once __DIR__ . '/../data/models/activePDF.php';
 
 
-use repositories\RequestRepository;
 use repositories\ActiveBooksRepository;
 use repositories\PDFRepository;
 
@@ -27,13 +26,13 @@ if (isset($_GET['requestId'])) {
     $pdfId = $pdf['pdf_id'];
 
     if (!$pdf) {
-        $_SESSION["errorApprove"] = "Error approving";
+        $_SESSION["err"] = "Error approving";
         header("Location: /Fmi_web_php_books/handlers/activeBooksHandler.php");
     }
 
     $deleted = $activeRepository->delete("user_pdf_id", $requestId);
     if (!$deleted) {
-        $_SESSION["errorApprove"] = "Error";
+        $_SESSION["err"] = "Error";
         header("Location: /Fmi_web_php_books/handlers/activeBooksHandler.php");
         exit();
     }
@@ -45,7 +44,7 @@ if (isset($_GET['requestId'])) {
     header("Location: /Fmi_web_php_books/handlers/activeBooksHandler.php");
     exit();
 } else {
-    $_SESSION['errorApprove'] = "No request ID provided.";
+    $_SESSION['err'] = "Error finishing pdf!";
     header("Location: /Fmi_web_php_books/handlers/activeBooksHandler.php");
     exit();
 }

@@ -29,11 +29,8 @@ if ($searchQuery == "" || empty($searchQuery)) {
 }
 
 foreach ($results as &$book) {
-    if ($book['owner'] == $user_id) {
-        $book = [];
-    } else {
+   
         $book["owner"] = $userRepo->getUserById($book["owner"]);
-    }
 }
 $_SESSION['result'] = $results;
 

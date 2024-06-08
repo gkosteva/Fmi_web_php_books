@@ -8,7 +8,7 @@ if (!isset($_SESSION['user_id'])) {
 }
 $user_id = $_SESSION['user_id'];
 
-$uploads = isset($_SESSION['my_uploads']) ? $_SESSION['my_uploads'] : [];
+$uploads = isset($_SESSION['myUploads']) ? $_SESSION['myUploads'] : [];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,7 +25,7 @@ $uploads = isset($_SESSION['my_uploads']) ? $_SESSION['my_uploads'] : [];
     <ul class="header-links">
     <li><a href="/Fmi_web_php_books/handlers/activeBooksHandler.php">Active Books</a></li>
             <li><a style="text-decoration: underline;" href="/Fmi_web_php_books/handlers/myUploadsHandler.php">My Uploads</a></li>
-       <li><a href="add_pdf.php">Add PDF</a></li>
+       <li><a href="addPdf.php">Add PDF</a></li>
        <li><a href="/Fmi_web_php_books/handlers/requestUploadHandler.php">Requests</a></li>
        <li><a href="/Fmi_web_php_books/handlers/guestRequestUploadHandler.php">Guest requests</a></li>
         <li><a href="home.php">Home</a></li>

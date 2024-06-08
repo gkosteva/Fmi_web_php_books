@@ -27,12 +27,12 @@ if (isset($_GET['requestId'])) {
     $pdfRepository = new PDFRepository();
     $pdf = $pdfRepository->getPDFById($request["pdf_id"]);
     if (!$pdf) {
-        $_SESSION["errorApprove"] = "Error approving";
+        $_SESSION["err"] = "Error approving";
         header("Location: /Fmi_web_php_books/handlers/requestUploadHandler.php");
     }
     $update = $pdfRepository->update($pdf["id"], $pdf["users_allowed_count"] + 1, "users_allowed_count");
     if (!$update) {
-        $_SESSION["errorApprove"] = "Error updating";
+        $_SESSION["err"] = "Error updating";
         header("Location: /Fmi_web_php_books/handlers/requestUploadHandler.php");
         exit();
     }
@@ -49,22 +49,19 @@ if (isset($_GET['requestId'])) {
     $success = $activeBookRepository->create($active);
 
     if ($success) {
-        $_SESSION['message'] = "Request approved successfully.";
-        $_SESSION['errorApprove'] = '';
-
+        $_SESSION['msg'] = "Request approved successfully!";
     } else {
-        $_SESSION['errorApprove'] = "Failed to approve the request.";
-        $_SESSION['message'] = '';
+        $_SESSION['erroerrrApprove'] = "Failed to approve the request!";
     }
 
     $deleted = $requestRepo->deleteRequest("request_id", $requestId);
     if (!$deleted) {
-        $_SESSION["errorApprove"] = "Error";
+        $_SESSION["err"] = "Error";
     }
     header("Location: /Fmi_web_php_books/handlers/requestUploadHandler.php");
     exit();
 } else {
-    $_SESSION['errorApprove'] = "No request ID provided.";
+    $_SESSION['err'] = "Error approving pdf!";
     header("Location: /Fmi_web_php_books/handlers/requestUploadHandler.php");
     exit();
 }
