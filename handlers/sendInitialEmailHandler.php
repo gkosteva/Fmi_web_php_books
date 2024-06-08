@@ -34,7 +34,8 @@ $request = new UnregisteredRequest($email, $pdfId["id"], $ownerId["id"], $reques
 $exist = $requestRepo->findRequestPDFExisting($pdfId["id"], $email, $ownerId["id"]);
 
 if ($exist !== null) {
-    //$_SESSION["msg"]= "Already requested!";
+    $_SESSION["err"]= "Already requested!";
+    header("Location: ../index.php");
     return;
 }
 $mail = new PHPMailer(true);
@@ -58,9 +59,10 @@ try {
     $mail->Body = "Your request for the PDF \"$pdfName\" from $authorEmail is waiting for an approval! We will inform you about the status of your request!";
 
     $mail->send();
-    //$_SESSION["msg"]="Successfully requested!";
+    $_SESSION["msg"]="Successfully requested!";
 
     echo 'Message has been sent';
+    header("Location: ../index.php");
 
 } catch (Exception $e) {
     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";

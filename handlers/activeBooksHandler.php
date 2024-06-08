@@ -29,13 +29,15 @@ $pdfRepo = new PDFRepository();
 $userRepo = new UsersRepository();
 
 foreach ($activeBooks as &$book) {
-    if($book["access_end_date"]<date("Y-m-d")) {
-        $deleted=$activeRepository->delete("user_pdf_id",$book["user_pdf_id"]);
-        $book=null;
+    if ($book["access_end_date"] < date("Y-m-d")) {
+        $deleted = $activeRepository->delete("user_pdf_id", $book["user_pdf_id"]);
+        $book = null;
         continue;
     }
     $book["user_id"] = $userRepo->getUserById($book["user_id"]);
     $book["pdf_id"] = $pdfRepo->getPDFById($book["pdf_id"]);
+    $ownerId= $book["pdf_id"]["owner"];
+    $book["owner_id"] = $userRepo->getUserById($ownerId);
 }
 
 $_SESSION['activeBooks'] = $activeBooks;

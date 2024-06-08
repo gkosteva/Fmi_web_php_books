@@ -32,10 +32,12 @@ $count = count($result);
 
 shuffle($result);
 $selected_pdfs = array_slice($result, 0, min(5, $count));
+$updated_pdfs = array();
 
-foreach ($selected_pdfs as &$pdf) {
+foreach ($selected_pdfs as $pdf) {
     $owner = $userRepo->getUserById($pdf["owner"]);
     $pdf["owner_email"] = $owner['email'];
+    $updated_pdfs[] = $pdf;
 }
 
 $msg = $_SESSION['msg'] ?? '';
@@ -69,7 +71,7 @@ unset($_SESSION['err']);
         You are not logged in. You can only read PDFs accessed via email links, which expire after 7 days. To use all
         features of this site, please log in or register.
     </div>
-    
+
     <?php if ($error != '') {
         echo "<h3 id='err' style='color:red;'>$error</h3>";
     } else {
@@ -78,8 +80,8 @@ unset($_SESSION['err']);
 
     <div id="results" class="results-container">
         <ul id="book-list">
-            <?php if (!empty($selected_pdfs)): ?>
-                <?php foreach ($selected_pdfs as $pdf): ?>
+            <?php if (!empty($updated_pdfs)): ?>
+                <?php foreach ($updated_pdfs as $pdf): ?>
                     <?php
                     if (substr($pdf["img"], 0, strlen('/Applications/XAMPP/xamppfiles/htdocs/')) === '/Applications/XAMPP/xamppfiles/htdocs/') {
                         $imageUrl = str_replace('/Applications/XAMPP/xamppfiles/htdocs/', '/', $pdf['img']);

@@ -34,9 +34,9 @@ $storedPassword = $user['password'];
 if (password_verify($password, $storedPassword)) {
     $_SESSION['user_id'] = $user['id'];
     $_SESSION['email'] = $user['email'];
-    redirect('../views/home.php');
+    redirect('../handlers/statisticsHandlerHomePage.php');
 } else {
     $_SESSION['error'] = "Невалидни потребителско име или парола.";
-    header("Location: /Fmi_web_php_books/views/login.php");
+    header("Location: /Fmi_web_php_books/handlers/statisticsHandlerHomePage.php");
     exit();
 }

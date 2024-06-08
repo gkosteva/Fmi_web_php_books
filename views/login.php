@@ -34,6 +34,6 @@ unset($_SESSION['form_data']);
             <p>You don't have an account? <a href="/Fmi_web_php_books/views/registration.php">Register here</a></p>
         </div>
     </div>
-    <script src="/Fmi_web_php_books/public/js/z.js"></script>
+    <script src="/Fmi_web_php_books/public/js/loginAndRegistrationErrorHandling.js"></script>
 </body>
 </html>

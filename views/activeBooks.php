@@ -36,22 +36,22 @@ unset($_SESSION['err']);
             <li><a href="/Fmi_web_php_books/views/addPdf.php">Add PDF</a></li>
             <li><a href="/Fmi_web_php_books/handlers/requestUploadHandler.php">Requests</a></li>
             <li><a href="/Fmi_web_php_books/handlers/guestRequestUploadHandler.php">Guest requests</a></li>
-            <li><a href="/Fmi_web_php_books/views/home.php">Home</a></li>
+            <li><a href="/Fmi_web_php_books/handlers/statisticsHandlerHomePage.php">Home</a></li>
             <li><a href="/Fmi_web_php_books/index.php">Logout</a></li>
         </ul>
     </div>
 
     <main>
-    <?php if ($error != '') {
-        echo "<h3 id='err' style='color:red;'>$error</h3>";
-    } else {
-        echo "<h3 id='err'>$msg</h3>";
-    } ?>
+        <?php if ($error != '') {
+            echo "<h3 id='err' style='color:red;'>$error</h3>";
+        } else {
+            echo "<h3 id='err'>$msg</h3>";
+        } ?>
         <h1>Book Library</h1>
         <ul id="book-list">
             <?php if (count($books) > 0): ?>
-                                <?php foreach ($books as $book): ?>
-                                                <?php if ($book !== null): ?>
+                <?php foreach ($books as $book): ?>
+                    <?php if ($book !== null): ?>
                         <?php
                         if (substr($book["pdf_id"]["img"], 0, strlen('/Applications/XAMPP/xamppfiles/htdocs/')) === '/Applications/XAMPP/xamppfiles/htdocs/') {
                             $imageUrl = str_replace('/Applications/XAMPP/xamppfiles/htdocs/', '/', $book["pdf_id"]['img']);
@@ -61,33 +61,33 @@ unset($_SESSION['err']);
                             $pdfUrl = str_replace('C:\\xampp\\htdocs\\', '/', $book["pdf_id"]['pdf_file']);
                         }
                         ?>
-                                                            <li class="book">
-                                                                <div>
-                                                                    <img src="<?= htmlspecialchars($imageUrl); ?>"
-                                                                        alt="Cover image for <?= htmlspecialchars($book["pdf_id"]['title']); ?>" class="imgBook">
-                                                                    <div class="info">
-                                                                        <p class="title">Title: <?= htmlspecialchars($book["pdf_id"]['title']); ?></p>
-                                                                        <p class="author">Author: <?= htmlspecialchars($book['user_id']['username']); ?></p>
-                                                                        <p class="description">Description: <?= htmlspecialchars($book["pdf_id"]['descript']); ?></p>
-                                                                    </div>
-                                                                </div>
+                        <li class="book">
+                            <div>
+                                <img src="<?= htmlspecialchars($imageUrl); ?>"
+                                    alt="Cover image for <?= htmlspecialchars($book["pdf_id"]['title']); ?>" class="imgBook">
+                                <div class="info">
+                                    <p class="title">Title: <?= htmlspecialchars($book["pdf_id"]['title']); ?></p>
+                                    <p class="author">Author: <?= htmlspecialchars($book['owner_id']['username']); ?></p>
+                                    <p class="description">Description: <?= htmlspecialchars($book["pdf_id"]['descript']); ?></p>
+                                </div>
+                            </div>
 
-                                                                <p class="daysLeft">Access due: <?= htmlspecialchars($book['access_end_date']); ?></p>
-                                                                <div class="buttons">
-                                                                    <div class="button">
-                                                                        <a class="pathPDF" href="<?= htmlspecialchars($pdfUrl); ?>" target="_blank" class="pathPDF">Read
-                                                                            PDF</a>
-                                                                    </div>
-                                                                    <div class='finishBook button'>
-                                                                        <a class='pathPDF'
-                                                                            href="/Fmi_web_php_books/handlers/finishHandler.php?requestId=<?= htmlspecialchars($book["user_pdf_id"]); ?>">Finish</a>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                    <?php endif; ?>
-                                <?php endforeach; ?>
+                            <p class="daysLeft">Access due: <?= htmlspecialchars($book['access_end_date']); ?></p>
+                            <div class="buttons">
+                                <div class="button">
+                                    <a class="pathPDF" href="<?= htmlspecialchars($pdfUrl); ?>" target="_blank" class="pathPDF">Read
+                                        PDF</a>
+                                </div>
+                                <div class='finishBook button'>
+                                    <a class='pathPDF'
+                                        href="/Fmi_web_php_books/handlers/finishHandler.php?requestId=<?= htmlspecialchars($book["user_pdf_id"]); ?>">Finish</a>
+                                </div>
+                            </div>
+                        </li>
+                    <?php endif; ?>
+                <?php endforeach; ?>
             <?php else: ?>
-                                <p id="noBooks">No active books available.</p>
+                <p id="noBooks">No active books available.</p>
             <?php endif; ?>
         </ul>
     </main>

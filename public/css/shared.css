@@ -136,3 +136,8 @@ button:hover {
     opacity: 0.5; 
     pointer-events: none; 
 }
+
+#chartContainer{
+    height: 370px;
+     width: 100%;
+}

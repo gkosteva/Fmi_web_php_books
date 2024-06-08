@@ -16,21 +16,21 @@ unset($_SESSION['form_data']);
 <body>
     <div class="form-container">
         <h2>Register</h2>
-        <div id="errorMessage" class="error-message" data-error="<?php  htmlspecialchars($errorMessage); ?>" style="display: none;"></div>
+        <div id="errorMessage" class="error-message" data-error="<?php echo htmlspecialchars($errorMessage); ?>" style="display: none;"></div>
         <form id="registrationForm" action="/Fmi_web_php_books/handlers/registrationHandler.php" method="post">
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" id="username" name="username" value="<?php  htmlspecialchars($formData['username']); ?>" required>
+                <input type="text" id="username" name="username" value="<?php htmlspecialchars($formData['username']); ?>" required>
                 <div class="error" id="usernameError"></div>
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" value="<?php  htmlspecialchars($formData['email']); ?>" required>
+                <input type="email" id="email" name="email" value="<?php htmlspecialchars($formData['email']); ?>" required>
                 <div class="error" id="emailError"></div>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" value="<?php  htmlspecialchars($formData['password']); ?>" required>
+                <input type="password" id="password" name="password" value="<?php htmlspecialchars($formData['password']); ?>" required>
             </div>
             <div class="form-group">
                 <label for="repeatPassword">Repeat Password</label>

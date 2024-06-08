@@ -41,7 +41,7 @@ unset($_SESSION['err']);
             <li><a href="/Fmi_web_php_books/views/addPdf.php">Add PDF</a></li>
             <li><a href="/Fmi_web_php_books/handlers/requestUploadHandler.php">Requests</a></li>
             <li><a style="text-decoration: underline;" href="#">Guest requests</a></li>
-            <li><a href="/Fmi_web_php_books/views/home.php">Home</a></li>
+            <li><a href="/Fmi_web_php_books/handlers/statisticsHandlerHomePage.php">Home</a></li>
             <li><a href="/Fmi_web_php_books/index.php">Logout</a></li>
         </ul>
     </div>

@@ -35,7 +35,7 @@ if ($exist != null) {
 
 $pdf = $pdfRepository->getPDFById($pdfId);
 
-if ($pdf["users_allowed_count"] == $pdf["max_users_allowed"]) {
+if ($pdf["users_allowed_count"] >= $pdf["max_users_allowed"]) {
     $_SESSION["err"] = "Try later, full capacity";
     header("Location: /Fmi_web_php_books/views/home.php");
     exit();
