@@ -12,6 +12,25 @@ if (!isset($_SESSION['user_id'])) {
 $user_id = $_SESSION['user_id'];
 $email = $_SESSION['email'];
 $books = $_SESSION['result'] ?? [];
+
+$error = $_SESSION["err"] ?? '';
+$msg = $_SESSION["msg"] ?? '';
+unset($_SESSION["err"]);
+unset($_SESSION["msg"]);
+
+$statisticsData=$_SESSION['statisticsData'];
+$count=count($statisticsData);
+
+$dataPoints = array();
+
+foreach ($statisticsData as $data) {
+    $dataPoints[] = array(
+        "label" => $data["title"],
+        "y" => $data["users_allowed_count"]
+    );
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -24,6 +43,26 @@ $books = $_SESSION['result'] ?? [];
     <link rel="stylesheet" href="/Fmi_web_php_books/public/css/shared.css" />
     <link rel="stylesheet" href="/Fmi_web_php_books/public/css/home.css" />
     <link rel="stylesheet" href="/Fmi_web_php_books/public/css/uploads.css" />
+    <script>
+        window.onload = function () {
+
+            var chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
+                theme: "light1",
+                title: {
+                    text: "Most read PDFs"
+                },
+                axisY: {
+                    title: "Number of active users"
+                },
+                data: [{
+                    type: "column",
+                    dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
+                }]
+            });
+            chart.render();
+        }
+    </script>
 </head>
 
 <body>
@@ -32,7 +71,7 @@ $books = $_SESSION['result'] ?? [];
         <ul class="header-links">
             <li><a href="/Fmi_web_php_books/handlers/activeBooksHandler.php">Active Books</a></li>
             <li><a href="/Fmi_web_php_books/handlers/myUploadsHandler.php">My Uploads</a></li>
-            <li><a href="/Fmi_web_php_books/views/add_pdf.php">Add PDF</a></li>
+            <li><a href="/Fmi_web_php_books/views/addPdf.php">Add PDF</a></li>
             <li><a href="/Fmi_web_php_books/handlers/requestUploadHandler.php">Requests</a></li>
             <li><a href="/Fmi_web_php_books/handlers/guestRequestUploadHandler.php">Guest requests</a></li>
             <li><a style="text-decoration: underline;" href="#">Home</a></li>
@@ -45,7 +84,14 @@ $books = $_SESSION['result'] ?? [];
             <button type="submit" id="searchButton">Search</button>
         </form>
     </div>
-    <?php echo "<h3 id='err'>$err</h3>"; ?>
+
+    <?php if ($error != '') {
+        echo "<h3 id='err' style='color:red;'>$error</h3>";
+    } else {
+        echo "<h3 id='err'>$msg</h3>";
+    } ?>
+    
+        <div id="chartContainer"></div>
 
     <div id="results" class="results-container">
         <ul id="book-list">
@@ -60,10 +106,10 @@ $books = $_SESSION['result'] ?? [];
                     ?>
                     <li class="book">
                         <img src="<?= htmlspecialchars($imageUrl); ?>"
-                            alt="Cover image for <?= htmlspecialchars($book['title']); ?>" class="imgBook">
+                            _SESSIONalt="Cover image for <?= htmlspecialchars($book['title']); ?>" class="imgBook">
                         <div class="info">
                             <p class="title">Title: <?= htmlspecialchars($book['title']); ?></p>
-                            <p class="author">Author: <?= htmlspecialchars($book['owner']["username"]); ?></p>
+                            <p class="author">Author: <?= htmlspecialchars($book['owner']['username']); ?></p>
                             <p class="description">Description: <?= htmlspecialchars($book['descript']); ?></p>
                         </div>
 
@@ -71,17 +117,21 @@ $books = $_SESSION['result'] ?? [];
                             <?php if ($book['owner']['id'] != $user_id): ?>
                                 <div class="button">
                                     <a class="pathPDF"
-                                        href='/Fmi_web_php_books/handlers/requestHandler.php?pdfId=<?= htmlspecialchars($book['id']); ?>&userId=<?= htmlspecialchars($user_id); ?>&ownerId=<?= htmlspecialchars($book["owner"]['id']); ?>'></a>Request
+                                        href="/Fmi_web_php_books/handlers/requestHandler.php?pdfId=<?= htmlspecialchars($book['id']); ?>&userId=<?= htmlspecialchars($user_id); ?>&ownerId=<?= htmlspecialchars($book["owner"]['id']); ?>">Request
                                         PDF</a>
-                                <?php endif; ?>
-                            </div>
+                                </div>
+                            <?php endif; ?>
+                        </div>
                     </li>
                 <?php endforeach; ?>
             <?php else: ?>
-                <p id="noBooks">No pdfs found</p>
+                <p id="noBooks">No pdfs</p>
             <?php endif; ?>
         </ul>
     </div>
+
+    <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+
 </body>
 
 </html>

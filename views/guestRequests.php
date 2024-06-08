@@ -12,6 +12,11 @@ if (!isset($_SESSION['user_id'])) {
 $user_id = $_SESSION['user_id'];
 $guestsRequests = $_SESSION['guestsRequests'] ?? [];
 
+$error = $_SESSION['err'] ?? '';
+$msg = $_SESSION['msg'] ?? '';
+
+unset($_SESSION['msg']);
+unset($_SESSION['err']);
 ?>
 
 <!DOCTYPE html>
@@ -33,10 +38,10 @@ $guestsRequests = $_SESSION['guestsRequests'] ?? [];
         <ul class="header-links">
             <li><a href="/Fmi_web_php_books/handlers/activeBooksHandler.php">Active Books</a></li>
             <li><a href="/Fmi_web_php_books/handlers/myUploadsHandler.php">My Uploads</a></li>
-            <li><a href="/Fmi_web_php_books/views/add_pdf.php">Add PDF</a></li>
-            <li><a href="/Fmi_web_php_books/handlers/requestUploadHandler.php">Requests</li>
+            <li><a href="/Fmi_web_php_books/views/addPdf.php">Add PDF</a></li>
+            <li><a href="/Fmi_web_php_books/handlers/requestUploadHandler.php">Requests</a></li>
             <li><a style="text-decoration: underline;" href="#">Guest requests</a></li>
-            <li><a href="/Fmi_web_php_books/views/home.php">Home</a></li>
+            <li><a href="/Fmi_web_php_books/handlers/statisticsHandlerHomePage.php">Home</a></li>
             <li><a href="/Fmi_web_php_books/index.php">Logout</a></li>
         </ul>
     </div>

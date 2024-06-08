@@ -54,10 +54,17 @@ if (isset($_GET['requestId'])) {
     $pdfName = $pdf['title'];
 
     if (!$pdf) {
+        $_SESSION["err"] = "Error approving!";
         header("Location: /Fmi_web_php_books/handlers/guestRrequestUploadHandler.php");
+    }
+    if ($pdf["users_allowed_count"] >= $pdf["max_users_allowed"]) {
+        $_SESSION["err"] = "You cannot approve this request right now. Max count of active users reached!";
+        header("Location: /Fmi_web_php_books/views/guestRequests.php");
+        exit();
     }
     $update = $pdfRepository->update($pdf["id"], $pdf["users_allowed_count"] + 1, "users_allowed_count");
     if (!$update) {
+        $_SESSION["err"] = "Error approving!";
         header("Location: /Fmi_web_php_books/handlers/guestRrequestUploadHandler.php");
         exit();
     }
@@ -89,18 +96,19 @@ if (isset($_GET['requestId'])) {
         $mail->Body = "Your request for the pdf \"$pdfName\" has been approved! Click <a href='$link'>here</a> to open the PDF. This link will expire in 7 days.";
 
         $mail->send();
-        echo "<script>alert('Successfully accepted!');</script>";
+        $_SESSION["msg"] = "Successfuly approved!";
 
     } catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
-    $statusAccept="accept";
-    $statusUpdate=$requestRepo->updateStatus($requestId, "approved");
+    $statusAccept = "accept";
+    $statusUpdate = $requestRepo->updateStatus($requestId, "approved");
     var_dump($statusUpdate);
 
     header("Location: /Fmi_web_php_books/handlers/guestRequestUploadHandler.php");
     exit();
 } else {
+    $_SESSION["err"] = "Error approving!";
     header("Location: /Fmi_web_php_books/handlers/sguestRequestUploadHandler.php");
     exit();
 }

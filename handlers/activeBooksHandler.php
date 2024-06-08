@@ -16,12 +16,12 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
-$pdfRepository = new ActiveBooksRepository();
-$activeBooks = $pdfRepository->getActiveBooksByUserId($user_id);
+$activeRepository = new ActiveBooksRepository();
+$activeBooks = $activeRepository->getActiveBooksByUserId($user_id);
 
 if (!$activeBooks) {
-    $_SESSION['error'] = "No active books";
-    header("Location: ../views/active_books.php");
+    $_SESSION['activeBooks'] = [];
+    header("Location: ../views/activeBooks.php");
     exit();
 }
 
@@ -29,11 +29,17 @@ $pdfRepo = new PDFRepository();
 $userRepo = new UsersRepository();
 
 foreach ($activeBooks as &$book) {
+    if ($book["access_end_date"] < date("Y-m-d")) {
+        $deleted = $activeRepository->delete("user_pdf_id", $book["user_pdf_id"]);
+        $book = null;
+        continue;
+    }
     $book["user_id"] = $userRepo->getUserById($book["user_id"]);
     $book["pdf_id"] = $pdfRepo->getPDFById($book["pdf_id"]);
-    $book["owner_id"] = $userRepo->getUserById($book["owner_id"]);
+    $ownerId= $book["pdf_id"]["owner"];
+    $book["owner_id"] = $userRepo->getUserById($ownerId);
 }
 
-$_SESSION['active_books'] = $activeBooks;
-header("Location: ../views/active_books.php");
+$_SESSION['activeBooks'] = $activeBooks;
+header("Location: ../views/activeBooks.php");
 exit();

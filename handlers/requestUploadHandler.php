@@ -31,7 +31,7 @@ foreach ($pdfIdsOfUser as &$pdf) {
 }
 
 if (!$requests) {
-    $_SESSION['error'] = "No requests";
+    $_SESSION['requests']=[];
     header("Location: ../views/requests.php");
     exit();
 }

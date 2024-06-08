@@ -10,9 +10,7 @@ require_once __DIR__ . '/../data/models/activePDF.php';
 
 
 use repositories\RequestRepository;
-use repositories\ActiveBooksRepository;
 use repositories\PDFRepository;
-use models\ActivePDF;
 
 if (!isset($_SESSION['user_id'])) {
     header("Location: /Fmi_web_php_books/views/login.php");
@@ -26,23 +24,23 @@ if (isset($_GET['requestId'])) {
 
     $pdfRepository = new PDFRepository();
     $pdf = $pdfRepository->getPDFById($request["pdf_id"]);
-    if(!$pdf){
-        $_SESSION["errorApprove"] = "Error approving";
+    if (!$pdf) {
+        $_SESSION["err"] = "Error approving";
         header("Location: /Fmi_web_php_books/handlers/requestUploadHandler.php");
     }
 
-    $deleted = $requestRepo->deleteRequest("request_id",$requestId);
+    $deleted = $requestRepo->deleteRequest("request_id", $requestId);
     if (!$deleted) {
-        $_SESSION["errorApprove"] = "Error";
+        $_SESSION["err"] = "Error";
         header("Location: /Fmi_web_php_books/handlers/requestUploadHandler.php");
         exit();
     }
-    $_SESSION["errorApprove"]="Pdf declined!";
+    $_SESSION["msg"] = "Pdf declined!";
     header("Location: /Fmi_web_php_books/handlers/requestUploadHandler.php");
     exit();
 } else {
-    $_SESSION['errorApprove'] = "No request ID provided.";
+    $_SESSION['err'] = "No request ID provided.";
     header("Location: /Fmi_web_php_books/handlers/requestUploadHandler.php");
-exit();
+    exit();
 }
 

@@ -40,17 +40,17 @@ $targetPdfPath = $baseDir . $targetPdfDir . $pdfFileName;
 
 // Move uploaded files
 if (move_uploaded_file($imagePath, $targetImagePath)) {
-    echo "Image upload successful<br>";
+    $_SESSION["msg"]= "Image upload successful";
 } else {
-    echo "Image upload failed<br>";
+    $_SESSION["err"]= "Image upload failed";
     echo "move_uploaded_file error: " . error_get_last()['message'] . "<br>";
     exit();
 }
 
 if (move_uploaded_file($pdfPath, $targetPdfPath)) {
-    echo "PDF upload successful<br>";
+    $_SESSION["msg"]= "PDF upload successful";
 } else {
-    echo "PDF upload failed<br>";
+    $_SESSION["err"]= "PDF upload failed";
     echo "move_uploaded_file error: " . error_get_last()['message'] . "<br>";
     exit();
 }
@@ -69,4 +69,4 @@ $pdfRepository = new PDFRepository();
 $pdfRepository->create($pdf);
 
 // Redirect to a success page
-redirect('../views/home.php');
+redirect('../views/myUploads.php');

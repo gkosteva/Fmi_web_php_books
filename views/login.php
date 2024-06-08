@@ -3,6 +3,8 @@ session_start();
 $errorMessage = isset($_SESSION['error']) ? $_SESSION['error'] : '';
 $formData = isset($_SESSION['form_data']) ? $_SESSION['form_data'] : ['email' => '', 'password' => ''];
 unset($_SESSION['error']);
+unset($_SESSION['form_data']);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
