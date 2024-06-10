@@ -9,6 +9,13 @@ if (!isset($_SESSION['user_id'])) {
 $user_id = $_SESSION['user_id'];
 
 $uploads = isset($_SESSION['myUploads']) ? $_SESSION['myUploads'] : [];
+
+
+$error = $_SESSION['err'] ?? '';
+$msg = $_SESSION['msg'] ?? '';
+
+unset($_SESSION['msg']);
+unset($_SESSION['err']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,6 +26,8 @@ $uploads = isset($_SESSION['myUploads']) ? $_SESSION['myUploads'] : [];
     <title>My Uploads</title>
     <link rel="stylesheet" href="/Fmi_web_php_books/public/css/shared.css">
     <link rel="stylesheet" href="/Fmi_web_php_books/public/css/uploads.css">
+    <link rel="stylesheet" href="/Fmi_web_php_books/public/css/home.css">
+
 </head>
 
 <body>
@@ -37,36 +46,41 @@ $uploads = isset($_SESSION['myUploads']) ? $_SESSION['myUploads'] : [];
     </div>
 
     <main>
+    <?php if ($error != '') {
+        echo "<h3 id='err' style='color:red;'>$error</h3>";
+    } else {
+        echo "<h3 id='err'>$msg</h3>";
+    } ?>
         <h1>My Uploads</h1>
         <ul id="book-list">
             <?php if (count($uploads) > 0): ?>
-                <?php foreach ($uploads as $upload): ?>
-                    <?php
+                    <?php foreach ($uploads as $upload): ?>
+                            <?php
 
-                    if (substr($upload["img"], 0, strlen('/Applications/XAMPP/xamppfiles/htdocs/')) === '/Applications/XAMPP/xamppfiles/htdocs/') {
-                        $imageUrl = str_replace('/Applications/XAMPP/xamppfiles/htdocs/', '/', $upload['img']);
-                        $pdfUrl = str_replace('/Applications/XAMPP/xamppfiles/htdocs/', '/', $upload['pdf_file']);
-                    } else {
-                        $imageUrl = str_replace('C:\\xampp\\htdocs\\', '/', $upload['img']);
-                        $pdfUrl = str_replace('C:\\xampp\\htdocs\\', '/', $upload['pdf_file']);
-                    }
-                    ?>
-                    <li class="book">
-                        <img src="<?= htmlspecialchars($imageUrl) ?>" alt="Cover" class="imgBook">
-                        <div class="info">
-                            <h2 class="title">Title: <?= htmlspecialchars($upload['title']) ?></h2>
-                            <p class="description">Description: <?= htmlspecialchars($upload['descript']) ?></p>
-                            <p class="author">Active Users: <?= htmlspecialchars($upload['users_allowed_count']) ?></p>
-                        </div>
-                        <div class="buttons">
-                            <div class="button">
-                                <a href="<?= htmlspecialchars($pdfUrl) ?>" target="_blank" class="pathPDF">View PDF</a>
-                            </div>
-                        </div>
-                    </li>
-                <?php endforeach; ?>
+                            if (substr($upload["img"], 0, strlen('/Applications/XAMPP/xamppfiles/htdocs/')) === '/Applications/XAMPP/xamppfiles/htdocs/') {
+                                $imageUrl = str_replace('/Applications/XAMPP/xamppfiles/htdocs/', '/', $upload['img']);
+                                $pdfUrl = str_replace('/Applications/XAMPP/xamppfiles/htdocs/', '/', $upload['pdf_file']);
+                            } else {
+                                $imageUrl = str_replace('C:\\xampp\\htdocs\\', '/', $upload['img']);
+                                $pdfUrl = str_replace('C:\\xampp\\htdocs\\', '/', $upload['pdf_file']);
+                            }
+                            ?>
+                            <li class="book">
+                                <img src="<?= htmlspecialchars($imageUrl) ?>" alt="Cover" class="imgBook">
+                                <div class="info">
+                                    <h2 class="title">Title: <?= htmlspecialchars($upload['title']) ?></h2>
+                                    <p class="description">Description: <?= htmlspecialchars($upload['descript']) ?></p>
+                                    <p class="author">Active Users: <?= htmlspecialchars($upload['users_allowed_count']) ?></p>
+                                </div>
+                                <div class="buttons">
+                                    <div class="button">
+                                        <a href="<?= htmlspecialchars($pdfUrl) ?>" target="_blank" class="pathPDF">View PDF</a>
+                                    </div>
+                                </div>
+                            </li>
+                    <?php endforeach; ?>
             <?php else: ?>
-                <p id="noBooks">No uploads available.</p>
+                    <p id="noBooks">No uploads available.</p>
             <?php endif; ?>
         </ul>
     </main>
