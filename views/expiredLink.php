@@ -23,7 +23,7 @@
     </style>
 </head>
 <body>
-    <div class="message">Ops...it looks like your link has expired! You can try to request a new one!</div>
+    <div class="message">Ops...it looks like your resource has expired! You can try to request a new one!</div>
     <img src="/Fmi_web_php_books/public/widgets/notfound.png" alt="Expired Link Image">
 </body>
 </html>
