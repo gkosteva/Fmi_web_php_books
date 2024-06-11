@@ -43,7 +43,7 @@ if (move_uploaded_file($imagePath, $targetImagePath)) {
     $_SESSION["msg"]= "Image upload successful";
 } else {
     $_SESSION["err"]= "Image upload failed";
-    echo "move_uploaded_file error: " . error_get_last()['message'] . "<br>";
+    redirect("../handlers\myUploadsHandler.php");
     exit();
 }
 
@@ -51,7 +51,7 @@ if (move_uploaded_file($pdfPath, $targetPdfPath)) {
     $_SESSION["msg"]= "PDF upload successful";
 } else {
     $_SESSION["err"]= "PDF upload failed";
-    echo "move_uploaded_file error: " . error_get_last()['message'] . "<br>";
+    redirect("../handlers\myUploadsHandler.php");
     exit();
 }
 
@@ -69,4 +69,4 @@ $pdfRepository = new PDFRepository();
 $pdfRepository->create($pdf);
 
 // Redirect to a success page
-redirect('../views/myUploads.php');
+redirect("../handlers\myUploadsHandler.php");

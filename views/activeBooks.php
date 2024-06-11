@@ -75,7 +75,7 @@ unset($_SESSION['err']);
                             <p class="daysLeft">Access due: <?= htmlspecialchars($book['access_end_date']); ?></p>
                             <div class="buttons">
                                 <div class="button">
-                                    <a class="pathPDF" href="<?= htmlspecialchars($pdfUrl); ?>" target="_blank" class="pathPDF">Read
+                                    <a class="pathPDF" href="/Fmi_web_php_books/handlers/verifyPdfHandler.php?pdfPath=<?= htmlspecialchars($pdfUrl); ?>" target="_blank">Read
                                         PDF</a>
                                 </div>
                                 <div class='finishBook button'>

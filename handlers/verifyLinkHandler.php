@@ -43,8 +43,13 @@ if ($currentTimeInteger > $expirationTimeInteger) {
     } else {
         $pdfUrl = str_replace('C:\\xampp\\htdocs\\', '/', $pdfPath);
     }
-    $fullUrl = "http://localhost" . $pdfUrl;
+    $expirationToken = bin2hex(random_bytes(16));
+    $_SESSION['pdf_tokens'][$expirationToken] = $pdfUrl;
+    $maskedUrl = "http://localhost/Fmi_web_php_books/handlers/servePdfHandler.php?token=$expirationToken";
+    header("Location: $maskedUrl");
+    exit();
+    // $fullUrl = "http://localhost" . $pdfUrl;
 
-    header("Location: $fullUrl");
+    // header("Location: $fullUrl");
 }
 

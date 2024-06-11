@@ -30,13 +30,16 @@ $userRepo = new UsersRepository();
 
 foreach ($activeBooks as &$book) {
     if ($book["access_end_date"] < date("Y-m-d")) {
+        $currentPdfFromPdfRepo = $pdfRepo->getPDFById($book["pdf_id"]);
+        $currentCount = $currentPdfFromPdfRepo["users_allowed_count"] - 1;
+        $pdfRepo->update($book["pdf_id"], $currentCount, "users_allowed_count");
         $deleted = $activeRepository->delete("user_pdf_id", $book["user_pdf_id"]);
         $book = null;
         continue;
     }
     $book["user_id"] = $userRepo->getUserById($book["user_id"]);
     $book["pdf_id"] = $pdfRepo->getPDFById($book["pdf_id"]);
-    $ownerId= $book["pdf_id"]["owner"];
+    $ownerId = $book["pdf_id"]["owner"];
     $book["owner_id"] = $userRepo->getUserById($ownerId);
 }
 

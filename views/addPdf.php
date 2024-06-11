@@ -66,7 +66,7 @@ $email = $_SESSION['email'];
             </div>
             <div class="form-group">
                 <label for="people">People to Use</label>
-                <select id="people" name="people">
+                <select id="people" name="people" required>
                     <option value="" selected disabled>Select a number</option>
                     <option value="1">1</option>
                     <option value="2">2</option>

@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Jun 07, 2024 at 03:16 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Host: 127.0.0.1
+-- Generation Time: Jun 10, 2024 at 11:33 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `fmi_php`
+-- Database: `db_web`
 --
 
 -- --------------------------------------------------------
@@ -46,10 +46,9 @@ CREATE TABLE `pdfs` (
 --
 
 INSERT INTO `pdfs` (`id`, `title`, `img`, `pdf_file`, `descript`, `file_path`, `active_period`, `max_users_allowed`, `users_allowed_count`, `is_active`, `owner`) VALUES
-(12, 'First Pdf', '/Applications/XAMPP/xamppfiles/htdocs/Fmi_web_php_books/public/uploads/images/66559b24e14b3-images.jpg', '/Applications/XAMPP/xamppfiles/htdocs/Fmi_web_php_books/public/uploads/pdfs/66559b24e14c2-сем.pdf', 'some really short descripition just to have something here. Just statistics things', '/Applications/XAMPP/xamppfiles/htdocs/Fmi_web_php_books/public/uploads/pdfs/66559b24e14c2-сем.pdf', 20, 10, 7, 1, 4),
-(13, 'italy', 'C:\\xampp\\htdocs\\Fmi_web_php_books/public/uploads/images/6657871d23adc-Italy.jpg', 'C:\\xampp\\htdocs\\Fmi_web_php_books/public/uploads/pdfs/6657871d23ae4-Домашна-работа-4.pdf', 'jnini', 'C:\\xampp\\htdocs\\Fmi_web_php_books/public/uploads/pdfs/6657871d23ae4-Домашна-работа-4.pdf', 7, 5, 22, 1, 4),
-(14, 'sssssss', 'C:\\xampp\\htdocs\\Fmi_web_php_books/public/uploads/images/66578f15e464a-Italy.jpg', 'C:\\xampp\\htdocs\\Fmi_web_php_books/public/uploads/pdfs/66578f15e4652-IntelliEthics_Feedback.pdf', 'ss', 'C:\\xampp\\htdocs\\Fmi_web_php_books/public/uploads/pdfs/66578f15e4652-IntelliEthics_Feedback.pdf', 7, 2, 2, 1, 3),
-(18, 'MyUpload', '/Applications/XAMPP/xamppfiles/htdocs/Fmi_web_php_books/public/uploads/images/6660a9897edfd-images.jpeg', '/Applications/XAMPP/xamppfiles/htdocs/Fmi_web_php_books/public/uploads/pdfs/6660a9897ee60-8MI0600092.pdf', 'try to request', '/Applications/XAMPP/xamppfiles/htdocs/Fmi_web_php_books/public/uploads/pdfs/6660a9897ee60-8MI0600092.pdf', 8, 3, 2, 1, 5);
+(22, 'Математически увод в икономиката', 'C:\\xampp\\htdocs\\Fmi_web_php_books/public/uploads/images/6667568bc984d-Screenshot 2024-06-10 223300.png', 'C:\\xampp\\htdocs\\Fmi_web_php_books/public/uploads/pdfs/6667568bc9851-МУИ - компресирани теми.pdf', 'Компресирани теми ', 'C:\\xampp\\htdocs\\Fmi_web_php_books/public/uploads/pdfs/6667568bc9851-МУИ - компресирани теми.pdf', 7, 5, 0, 1, 7),
+(23, 'The adventure of Tom Sawer', 'C:\\xampp\\htdocs\\Fmi_web_php_books/public/uploads/images/666766c7867d7-Screenshot 2024-06-10 234334.png', 'C:\\xampp\\htdocs\\Fmi_web_php_books/public/uploads/pdfs/666766c7867da-The_Adventures_of_Tom_Sawyer.pdf', 'Short adventure book', 'C:\\xampp\\htdocs\\Fmi_web_php_books/public/uploads/pdfs/666766c7867da-The_Adventures_of_Tom_Sawyer.pdf', 20, 8, 1, 1, 8),
+(24, 'The wizard of Oz', 'C:\\xampp\\htdocs\\Fmi_web_php_books/public/uploads/images/666767a58c135-the-wizard-of-oz.jpg', 'C:\\xampp\\htdocs\\Fmi_web_php_books/public/uploads/pdfs/666767a58c13c-The-Wizard-Of-Oz.pdf', 'Adventure book for kids', 'C:\\xampp\\htdocs\\Fmi_web_php_books/public/uploads/pdfs/666767a58c13c-The-Wizard-Of-Oz.pdf', 10, 10, 2, 1, 8);
 
 -- --------------------------------------------------------
 
@@ -65,6 +64,13 @@ CREATE TABLE `pdf_requests` (
   `status` enum('pending','approved','denied') DEFAULT 'pending',
   `owner_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `pdf_requests`
+--
+
+INSERT INTO `pdf_requests` (`request_id`, `user_id`, `pdf_id`, `request_date`, `status`, `owner_id`) VALUES
+(18, 8, 22, '2024-06-10 00:00:00', NULL, 7);
 
 -- --------------------------------------------------------
 
@@ -86,8 +92,7 @@ CREATE TABLE `pdf_requests_unregistered` (
 --
 
 INSERT INTO `pdf_requests_unregistered` (`id`, `user_email`, `pdf_id`, `request_date`, `status`, `owner_id`) VALUES
-(11, 'gkosteva@uni-sofia.bg', 18, '2024-06-07 00:00:00', 'approved', 5),
-(12, 'gkosteva@uni-sofia.bg', 13, '2024-06-07 00:00:00', 'declined', 4);
+(25, 'lea@abv.bg', 24, '2024-06-10 00:00:00', 'approved', 8);
 
 -- --------------------------------------------------------
 
@@ -108,9 +113,7 @@ CREATE TABLE `tokens` (
 --
 
 INSERT INTO `tokens` (`id`, `token`, `expiration_date`, `user_email`, `pdf_id`) VALUES
-(24, '99c122c9934dda86948e3ed40cd9b322', '2024-06-14 14:12:35', 'gkosteva@uni-sofia.bg', 13),
-(25, '12a22a7818688567afedec548ca0809d', '2024-06-14 15:03:40', 'gkosteva@uni-sofia.bg', 12),
-(26, '243a1e93d4e009eb539179abdd8851e0', '2024-06-14 15:09:53', 'gkosteva@uni-sofia.bg', 18);
+(31, '6a3ddd5258194cc720e0db431b9f9f52', '2024-06-17 22:57:05', 'lea@abv.bg', 24);
 
 -- --------------------------------------------------------
 
@@ -131,9 +134,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `email`, `password`, `is_registered`) VALUES
-(3, 'gabi', 'gabi@abv.bg', '$2y$10$b9PNPTN.w9LCyZ6FtUPs4O6zg.eC/RF9Bsx8I/6Ug13Akrv85HXSa', 1),
-(4, 'gabi1', 'gabi1@abv.bg', '$2y$10$qbMlEe1o/FKqfyaNsOau3.5/X4VrlYdp.GMa4MUb5T1UBItwd7cZ.', 1),
-(5, 'Gabriela', 'gabriela@abv.bg', '$2y$10$.UV4lJp89uQxVRihkMp6n.5LQnedSxJFGahJjetR4lMqcWq2.4wma', 1);
+(7, 'Nikol', 'nikol@abv.bg', '$2y$10$s5ItgSu.lE7dP0riRkdMn.vWIgM.tuz2g/.NRjGL7I/ay0n2KCC9a', 1),
+(8, 'Gabi', 'gabi@abv.bg', '$2y$10$eCbUWuDnuliRGBslM/ylse32yaNPRyMQ97XZIzvFY4ssaTFAcSyBO', 1);
 
 -- --------------------------------------------------------
 
@@ -154,7 +156,8 @@ CREATE TABLE `user_pdfs` (
 --
 
 INSERT INTO `user_pdfs` (`user_pdf_id`, `user_id`, `pdf_id`, `access_start_date`, `access_end_date`) VALUES
-(14, 3, 12, '2024-06-06', '2024-06-26');
+(24, 7, 23, '2024-06-10', '2024-06-30'),
+(25, 7, 24, '2024-06-10', '2024-06-20');
 
 --
 -- Indexes for dumped tables
@@ -212,37 +215,37 @@ ALTER TABLE `user_pdfs`
 -- AUTO_INCREMENT for table `pdfs`
 --
 ALTER TABLE `pdfs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `pdf_requests`
 --
 ALTER TABLE `pdf_requests`
-  MODIFY `request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `pdf_requests_unregistered`
 --
 ALTER TABLE `pdf_requests_unregistered`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `tokens`
 --
 ALTER TABLE `tokens`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `user_pdfs`
 --
 ALTER TABLE `user_pdfs`
-  MODIFY `user_pdf_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `user_pdf_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- Constraints for dumped tables
