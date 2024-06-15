@@ -3,7 +3,7 @@ body {
 }
 
 .header-container {
-    background-image: url('/Fmi_web_php_books/public/widgets/banner.jpg');
+    background-image: url('../widgets/banner.jpg');
     background-size: cover; 
     background-position: center; 
     color: #fff;

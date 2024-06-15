@@ -24,9 +24,9 @@ unset($_SESSION['err']);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Uploads</title>
-    <link rel="stylesheet" href="/Fmi_web_php_books/public/css/shared.css">
-    <link rel="stylesheet" href="/Fmi_web_php_books/public/css/uploads.css">
-    <link rel="stylesheet" href="/Fmi_web_php_books/public/css/home.css">
+    <link rel="stylesheet" href="../public/css/shared.css">
+    <link rel="stylesheet" href="../public/css/uploads.css">
+    <link rel="stylesheet" href="../public/css/home.css">
 
 </head>
 
@@ -34,14 +34,14 @@ unset($_SESSION['err']);
     <div class="header-container">
         <h1>My PDF Library</h1>
         <ul class="header-links">
-            <li><a href="/Fmi_web_php_books/handlers/activeBooksHandler.php">Active Books</a></li>
-            <li><a style="text-decoration: underline;" href="/Fmi_web_php_books/handlers/myUploadsHandler.php">My
+            <li><a href="../handlers/activeBooksHandler.php">Active Books</a></li>
+            <li><a style="text-decoration: underline;" href="../handlers/myUploadsHandler.php">My
                     Uploads</a></li>
             <li><a href="addPdf.php">Add PDF</a></li>
-            <li><a href="/Fmi_web_php_books/handlers/requestUploadHandler.php">Requests</a></li>
-            <li><a href="/Fmi_web_php_books/handlers/guestRequestUploadHandler.php">Guest requests</a></li>
-            <li><a href="/Fmi_web_php_books/handlers/statisticsHandlerHomePage.php">Home</a></li>
-            <li><a href="/Fmi_web_php_books/index.php">Logout</a></li>
+            <li><a href="../handlers/requestUploadHandler.php">Requests</a></li>
+            <li><a href="../handlers/guestRequestUploadHandler.php">Guest requests</a></li>
+            <li><a href="../handlers/statisticsHandlerHomePage.php">Home</a></li>
+            <li><a href="../index.php">Logout</a></li>
         </ul>
     </div>
 
@@ -56,14 +56,9 @@ unset($_SESSION['err']);
             <?php if (count($uploads) > 0): ?>
                     <?php foreach ($uploads as $upload): ?>
                             <?php
+                               $imageUrl = preg_replace('/^.*?(?=public)/', '../', $upload['img']);
+                               $pdfUrl = preg_replace('/^.*?(?=public)/', '../', $upload['pdf_file']);
 
-                            if (substr($upload["img"], 0, strlen('/Applications/XAMPP/xamppfiles/htdocs/')) === '/Applications/XAMPP/xamppfiles/htdocs/') {
-                                $imageUrl = str_replace('/Applications/XAMPP/xamppfiles/htdocs/', '/', $upload['img']);
-                                $pdfUrl = str_replace('/Applications/XAMPP/xamppfiles/htdocs/', '/', $upload['pdf_file']);
-                            } else {
-                                $imageUrl = str_replace('C:\\xampp\\htdocs\\', '/', $upload['img']);
-                                $pdfUrl = str_replace('C:\\xampp\\htdocs\\', '/', $upload['pdf_file']);
-                            }
                             ?>
                             <li class="book">
                                 <img src="<?= htmlspecialchars($imageUrl) ?>" alt="Cover" class="imgBook">
@@ -75,6 +70,9 @@ unset($_SESSION['err']);
                                 <div class="buttons">
                                     <div class="button">
                                         <a href="<?= htmlspecialchars($pdfUrl) ?>" target="_blank" class="pathPDF">View PDF</a>
+                                    </div>
+                                    <div class="button">
+                                        <a href="" class="pathPDF">Share</a>
                                     </div>
                                 </div>
                             </li>

@@ -4,9 +4,9 @@ session_start();
 require_once __DIR__ . '/../data/repositories/unregisteredRequestsRepository.php';
 require_once __DIR__ . '/../data/repositories/pdfRepository.php';
 require_once __DIR__ . '/../data/models/unregisterRequests.php';
-require_once __DIR__ . '/../PHPMailer/Exception.php';
-require_once __DIR__ . '/../PHPMailer/SMTP.php';
-require_once __DIR__ . '/../PHPMailer/PHPMailer.php';
+require_once __DIR__ . '../PHPMailer/Exception.php';
+require_once __DIR__ . '../PHPMailer/SMTP.php';
+require_once __DIR__ . '../PHPMailer/PHPMailer.php';
 require_once __DIR__ . '/../data/models/token.php';
 require_once __DIR__ . '/../data/repositories/sendEmailsRepository.php';
 
@@ -20,7 +20,7 @@ use models\Token;
 
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: /Fmi_web_php_books/views/login.php");
+    header("Location: ../views/login.php");
     exit();
 }
 
@@ -55,17 +55,17 @@ if (isset($_GET['requestId'])) {
 
     if (!$pdf) {
         $_SESSION["err"] = "Error approving!";
-        header("Location: /Fmi_web_php_books/handlers/guestRrequestUploadHandler.php");
+        header("Location: guestRrequestUploadHandler.php");
     }
     if ($pdf["users_allowed_count"] >= $pdf["max_users_allowed"]) {
         $_SESSION["err"] = "You cannot approve this request right now. Max count of active users reached!";
-        header("Location: /Fmi_web_php_books/views/guestRequests.php");
+        header("Location: ../views/guestRequests.php");
         exit();
     }
     $update = $pdfRepository->update($pdf["id"], $pdf["users_allowed_count"] + 1, "users_allowed_count");
     if (!$update) {
         $_SESSION["err"] = "Error approving!";
-        header("Location: /Fmi_web_php_books/handlers/guestRrequestUploadHandler.php");
+        header("Location: guestRrequestUploadHandler.php");
         exit();
     }
 
@@ -76,7 +76,7 @@ if (isset($_GET['requestId'])) {
 
     $mail = new PHPMailer(true);
 
-    $link = "http://localhost/Fmi_web_php_books/handlers/verifyLinkHandler.php?token=$tokenString";
+    $link = "verifyLinkHandler.php?token=$tokenString";
 
     try {
         $mail->SMTPDebug = 0;
@@ -105,11 +105,11 @@ if (isset($_GET['requestId'])) {
     $statusUpdate = $requestRepo->updateStatus($requestId, "approved");
     var_dump($statusUpdate);
 
-    header("Location: /Fmi_web_php_books/handlers/guestRequestUploadHandler.php");
+    header("Location: guestRequestUploadHandler.php");
     exit();
 } else {
     $_SESSION["err"] = "Error approving!";
-    header("Location: /Fmi_web_php_books/handlers/sguestRequestUploadHandler.php");
+    header("Location: sguestRequestUploadHandler.php");
     exit();
 }
 

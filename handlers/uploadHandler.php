@@ -1,7 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../data/repositories/pdfRepository.php';
-require_once __DIR__ . '/../common/httpHelpers.php';
+require_once __DIR__ . '../../common/httpHelpers.php';
 require_once __DIR__ . '/../data/models/pdf.php';
 
 use repositories\PDFRepository;
@@ -11,7 +11,7 @@ session_start();
 
 // Check if the user is logged in
 if (!isset($_SESSION['user_id'])) {
-    header("Location: /Fmi_web_php_books/views/login.php");
+    header("Location: ../views/login.php");
     exit();
 }
 
@@ -43,7 +43,7 @@ if (move_uploaded_file($imagePath, $targetImagePath)) {
     $_SESSION["msg"]= "Image upload successful";
 } else {
     $_SESSION["err"]= "Image upload failed";
-    redirect("../handlers\myUploadsHandler.php");
+    redirect("myUploadsHandler.php");
     exit();
 }
 
@@ -51,7 +51,7 @@ if (move_uploaded_file($pdfPath, $targetPdfPath)) {
     $_SESSION["msg"]= "PDF upload successful";
 } else {
     $_SESSION["err"]= "PDF upload failed";
-    redirect("../handlers\myUploadsHandler.php");
+    redirect("myUploadsHandler.php");
     exit();
 }
 
@@ -69,4 +69,4 @@ $pdfRepository = new PDFRepository();
 $pdfRepository->create($pdf);
 
 // Redirect to a success page
-redirect("../handlers\myUploadsHandler.php");
+redirect("myUploadsHandler.php");

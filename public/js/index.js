@@ -39,7 +39,7 @@ function handleModal(pdfName, authorName) {
         loadingIndicator.style.display = 'block';
 
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "/Fmi_web_php_books/handlers/sendInitialEmailHandler.php", true); 
+        xhr.open("POST", "../handlers/sendInitialEmailHandler.php", true); 
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.onreadystatechange = function() {
             if (xhr.readyState === XMLHttpRequest.DONE) {

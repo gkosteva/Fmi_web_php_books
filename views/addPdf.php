@@ -4,7 +4,7 @@ session_start();
 // Check if the user is logged in
 if (!isset($_SESSION['user_id'])) {
     // Redirect to login page if not logged in
-    header("Location: /Fmi_web_php_books/views/login.php");
+    header("Location:  ../views/login.php");
     exit();
 }
 
@@ -19,30 +19,30 @@ $email = $_SESSION['email'];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PDF Upload Form</title>
-    <link rel="stylesheet" href="/Fmi_web_php_books/public/css/shared.css">
-    <link rel="stylesheet" href="/Fmi_web_php_books/public/css/addPdf.css">
+    <link rel="stylesheet" href=" ../public/css/shared.css">
+    <link rel="stylesheet" href=" ../public/css/addPdf.css">
 </head>
 <body>
     <div class="header-container">
         <h1>My PDF Library</h1>
         <ul class="header-links">
-        <li><a href="/Fmi_web_php_books/handlers/activeBooksHandler.php">Active Books</a></li>
-            <li><a href="/Fmi_web_php_books/handlers/myUploadsHandler.php">My Uploads</a></li>
+        <li><a href=" ../handlers/activeBooksHandler.php">Active Books</a></li>
+            <li><a href=" ../handlers/myUploadsHandler.php">My Uploads</a></li>
             <li><a style="text-decoration: underline;" href="#">Add PDF</a></li>
-            <li><a href="/Fmi_web_php_books/handlers/requestUploadHandler.php">Requests</a></li>
-            <li><a href="/Fmi_web_php_books/handlers/guestRequestUploadHandler.php">Guest requests</a></li>
-            <li><a href="/Fmi_web_php_books/handlers/statisticsHandlerHomePage.php">Home</a></li>
-            <li><a href="/Fmi_web_php_books/index.php">Logout</a></li>
+            <li><a href=" ../handlers/requestUploadHandler.php">Requests</a></li>
+            <li><a href=" ../handlers/guestRequestUploadHandler.php">Guest requests</a></li>
+            <li><a href=" ../handlers/statisticsHandlerHomePage.php">Home</a></li>
+            <li><a href=" ../index.php">Logout</a></li>
         </ul>
     </div>
 
     <div class="form-container">
         <h2>Upload Your PDF</h2>
-        <form action="/Fmi_web_php_books/handlers/uploadHandler.php" method="post" enctype="multipart/form-data">
+        <form action=" ../handlers/uploadHandler.php" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="image">Image</label>
                 <div class="file-drop-area image-drop-area">
-                    <img src="/Fmi_web_php_books/public/widgets/uploadimage.png" alt="Upload Image" class="upload-icon" id="image-preview">
+                    <img src=" ../public/widgets/uploadimage.png" alt="Upload Image" class="upload-icon" id="image-preview">
                     <span class="fake-btn">Select Image</span>
                     <input class="file-input" type="file" id="image" name="image" accept="image/*">
                 </div>
@@ -58,7 +58,7 @@ $email = $_SESSION['email'];
             <div class="form-group">
                 <label for="pdf">Upload PDF</label>
                 <div class="file-drop-area pdf-drop-area">
-                    <img src="/Fmi_web_php_books/public/widgets/uploadpdf.png" alt="Upload PDF" class="upload-icon">
+                    <img src=" ../public/widgets/uploadpdf.png" alt="Upload PDF" class="upload-icon">
                     <span class="fake-btn">Select PDF</span>
                     <span class="file-msg">or drag & drop PDF file here</span>
                     <input class="file-input" type="file" id="pdf" name="pdf" accept=".pdf" required>
@@ -112,6 +112,6 @@ $email = $_SESSION['email'];
             <button class="fake-btn" type="submit">Submit</button>
         </form>
     </div>
-    <script src="/Fmi_web_php_books/public/js/addPdfScripts.js"></script>
+    <script src=" ../public/js/addPdfScripts.js"></script>
 </body>
 </html>

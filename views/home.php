@@ -4,7 +4,7 @@ session_start();
 // Check if the user is logged in
 if (!isset($_SESSION['user_id'])) {
     // Redirect to login page if not logged in
-    header("Location: /Fmi_web_php_books/views/login.php");
+    header("Location: ../views/login.php");
     exit();
 }
 
@@ -40,9 +40,9 @@ foreach ($statisticsData as $data) {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
-    <link rel="stylesheet" href="/Fmi_web_php_books/public/css/shared.css" />
-    <link rel="stylesheet" href="/Fmi_web_php_books/public/css/home.css" />
-    <link rel="stylesheet" href="/Fmi_web_php_books/public/css/uploads.css" />
+    <link rel="stylesheet" href="../public/css/shared.css" />
+    <link rel="stylesheet" href="../public/css/home.css" />
+    <link rel="stylesheet" href="../public/css/uploads.css" />
     <script>
         window.onload = function () {
 
@@ -69,17 +69,17 @@ foreach ($statisticsData as $data) {
     <div class="header-container">
         <h1>My PDF Library</h1>
         <ul class="header-links">
-            <li><a href="/Fmi_web_php_books/handlers/activeBooksHandler.php">Active Books</a></li>
-            <li><a href="/Fmi_web_php_books/handlers/myUploadsHandler.php">My Uploads</a></li>
-            <li><a href="/Fmi_web_php_books/views/addPdf.php">Add PDF</a></li>
-            <li><a href="/Fmi_web_php_books/handlers/requestUploadHandler.php">Requests</a></li>
-            <li><a href="/Fmi_web_php_books/handlers/guestRequestUploadHandler.php">Guest requests</a></li>
+            <li><a href="../handlers/activeBooksHandler.php">Active Books</a></li>
+            <li><a href="../handlers/myUploadsHandler.php">My Uploads</a></li>
+            <li><a href="../views/addPdf.php">Add PDF</a></li>
+            <li><a href="../handlers/requestUploadHandler.php">Requests</a></li>
+            <li><a href="../handlers/guestRequestUploadHandler.php">Guest requests</a></li>
             <li><a style="text-decoration: underline;" href="#">Home</a></li>
-            <li><a href="/Fmi_web_php_books/index.php">Logout</a></li>
+            <li><a href="../index.php">Logout</a></li>
         </ul>
     </div>
     <div class="search-container">
-        <form id="searchForm" method="POST" action="/Fmi_web_php_books/handlers/searchHandler.php">
+        <form id="searchForm" method="POST" action="../handlers/searchHandler.php">
             <input type="text" id="searchQuery" name="searchQuery" placeholder="Search here...">
             <button type="submit" id="searchButton">Search</button>
         </form>
@@ -98,11 +98,7 @@ foreach ($statisticsData as $data) {
             <?php if (count($books) > 0): ?>
                 <?php foreach ($books as $book): ?>
                     <?php
-                    if (substr($book["img"], 0, strlen('/Applications/XAMPP/xamppfiles/htdocs/')) === '/Applications/XAMPP/xamppfiles/htdocs/') {
-                        $imageUrl = str_replace('/Applications/XAMPP/xamppfiles/htdocs/', '/', $book['img']);
-                    } else {
-                        $imageUrl = str_replace('C:\\xampp\\htdocs\\', '/', $book['img']);
-                    }
+                        $imageUrl = preg_replace('/^.*?(?=public)/', '../', $book['img']);
                     ?>
                     <li class="book">
                         <img src="<?= htmlspecialchars($imageUrl); ?>"
@@ -117,7 +113,7 @@ foreach ($statisticsData as $data) {
                             <?php if ($book['owner']['id'] != $user_id): ?>
                                 <div class="button">
                                     <a class="pathPDF"
-                                        href="/Fmi_web_php_books/handlers/requestHandler.php?pdfId=<?= htmlspecialchars($book['id']); ?>&userId=<?= htmlspecialchars($user_id); ?>&ownerId=<?= htmlspecialchars($book["owner"]['id']); ?>">Request
+                                        href="../handlers/requestHandler.php?pdfId=<?= htmlspecialchars($book['id']); ?>&userId=<?= htmlspecialchars($user_id); ?>&ownerId=<?= htmlspecialchars($book["owner"]['id']); ?>">Request
                                         PDF</a>
                                 </div>
                             <?php endif; ?>

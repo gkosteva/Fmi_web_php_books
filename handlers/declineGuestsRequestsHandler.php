@@ -4,9 +4,9 @@ session_start();
 require_once __DIR__ . '/../data/repositories/unregisteredRequestsRepository.php';
 require_once __DIR__ . '/../data/repositories/pdfRepository.php';
 require_once __DIR__ . '/../data/models/unregisterRequests.php';
-require_once __DIR__ . '/../PHPMailer/Exception.php';
-require_once __DIR__ . '/../PHPMailer/SMTP.php';
-require_once __DIR__ . '/../PHPMailer/PHPMailer.php';
+require_once __DIR__ . '../PHPMailer/Exception.php';
+require_once __DIR__ . '../PHPMailer/SMTP.php';
+require_once __DIR__ . '../PHPMailer/PHPMailer.php';
 require_once __DIR__ . '/../data/models/token.php';
 require_once __DIR__ . '/../data/repositories/sendEmailsRepository.php';
 
@@ -18,7 +18,7 @@ use PHPMailer\PHPMailer\Exception;
 
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: /Fmi_web_php_books/views/login.php");
+    header("Location: ../views/login.php");
     exit();
 }
 
@@ -36,7 +36,7 @@ if (isset($_GET['requestId'])) {
     $pdfName = $pdf['title'];
 
     if (!$pdf) {
-        header("Location: /Fmi_web_php_books/handlers/guestRrequestUploadHandler.php");
+        header("Location:  guestRrequestUploadHandler.php");
     }
 
     $mail = new PHPMailer(true);
@@ -66,10 +66,10 @@ if (isset($_GET['requestId'])) {
     }
     $statusUpdate=$requestRepo->updateStatus($requestId, "declined");
 
-    header("Location: /Fmi_web_php_books/handlers/guestRequestUploadHandler.php");
+    header("Location:  guestRequestUploadHandler.php");
     exit();
 } else {
-    header("Location: /Fmi_web_php_books/handlers/sguestRequestUploadHandler.php");
+    header("Location:  sguestRequestUploadHandler.php");
     exit();
 }
 

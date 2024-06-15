@@ -15,7 +15,7 @@ use repositories\PDFRepository;
 use models\ActivePDF;
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: /Fmi_web_php_books/views/login.php");
+    header("Location: ../views/login.php");
     exit();
 }
 
@@ -28,12 +28,12 @@ if (isset($_GET['requestId'])) {
     $pdf = $pdfRepository->getPDFById($request["pdf_id"]);
     if (!$pdf) {
         $_SESSION["err"] = "Error approving";
-        header("Location: /Fmi_web_php_books/handlers/requestUploadHandler.php");
+        header("Location:  requestUploadHandler.php");
     }
     $update = $pdfRepository->update($pdf["id"], $pdf["users_allowed_count"] + 1, "users_allowed_count");
     if (!$update) {
         $_SESSION["err"] = "Error updating";
-        header("Location: /Fmi_web_php_books/handlers/requestUploadHandler.php");
+        header("Location:  requestUploadHandler.php");
         exit();
     }
 
@@ -48,7 +48,7 @@ if (isset($_GET['requestId'])) {
 
     if ($pdf["users_allowed_count"] >= $pdf["max_users_allowed"]) {
         $_SESSION["err"] = "You cannot approve this request right now. Max count of active users reached!";
-        header("Location: /Fmi_web_php_books/views/requests.php");
+        header("Location: ../views/requests.php");
         exit();
     }
     $success = $activeBookRepository->create($active);
@@ -63,11 +63,11 @@ if (isset($_GET['requestId'])) {
     if (!$deleted) {
         $_SESSION["err"] = "Error";
     }
-    header("Location: /Fmi_web_php_books/handlers/requestUploadHandler.php");
+    header("Location:  requestUploadHandler.php");
     exit();
 } else {
     $_SESSION['err'] = "Error approving pdf!";
-    header("Location: /Fmi_web_php_books/handlers/requestUploadHandler.php");
+    header("Location:  requestUploadHandler.php");
     exit();
 }
 

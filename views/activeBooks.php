@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: /views/login.php");
+    header("Location: ../views/login.php");
     exit();
 }
 $user_id = $_SESSION['user_id'];
@@ -22,9 +22,9 @@ unset($_SESSION['err']);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Active Books</title>
-    <link rel="stylesheet" href="\Fmi_web_php_books\public\css\home.css">
-    <link rel="stylesheet" href="/Fmi_web_php_books/public/css/shared.css">
-    <link rel="stylesheet" href="\Fmi_web_php_books\public\css\uploads.css">
+    <link rel="stylesheet" href="../public/css/home.css">
+    <link rel="stylesheet" href=" ../public/css/shared.css">
+    <link rel="stylesheet" href="../public/css/uploads.css">
 </head>
 
 <body>
@@ -32,12 +32,12 @@ unset($_SESSION['err']);
         <h1>My PDF Library</h1>
         <ul class="header-links">
             <li><a style="text-decoration: underline;" href="#">Active Books</a></li>
-            <li><a href="/Fmi_web_php_books/handlers/myUploadsHandler.php">My Uploads</a></li>
-            <li><a href="/Fmi_web_php_books/views/addPdf.php">Add PDF</a></li>
-            <li><a href="/Fmi_web_php_books/handlers/requestUploadHandler.php">Requests</a></li>
-            <li><a href="/Fmi_web_php_books/handlers/guestRequestUploadHandler.php">Guest requests</a></li>
-            <li><a href="/Fmi_web_php_books/handlers/statisticsHandlerHomePage.php">Home</a></li>
-            <li><a href="/Fmi_web_php_books/index.php">Logout</a></li>
+            <li><a href=" ../handlers/myUploadsHandler.php">My Uploads</a></li>
+            <li><a href=" addPdf.php">Add PDF</a></li>
+            <li><a href=" ../handlers/requestUploadHandler.php">Requests</a></li>
+            <li><a href=" ../handlers/guestRequestUploadHandler.php">Guest requests</a></li>
+            <li><a href=" ../handlers/statisticsHandlerHomePage.php">Home</a></li>
+            <li><a href=" ../index.php">Logout</a></li>
         </ul>
     </div>
 
@@ -53,13 +53,14 @@ unset($_SESSION['err']);
                 <?php foreach ($books as $book): ?>
                     <?php if ($book !== null): ?>
                         <?php
-                        if (substr($book["pdf_id"]["img"], 0, strlen('/Applications/XAMPP/xamppfiles/htdocs/')) === '/Applications/XAMPP/xamppfiles/htdocs/') {
-                            $imageUrl = str_replace('/Applications/XAMPP/xamppfiles/htdocs/', '/', $book["pdf_id"]['img']);
-                            $pdfUrl = str_replace('/Applications/XAMPP/xamppfiles/htdocs/', '/', $book["pdf_id"]['pdf_file']);
-                        } else {
-                            $imageUrl = str_replace('C:\\xampp\\htdocs\\', '/', $book["pdf_id"]['img']);
-                            $pdfUrl = str_replace('C:\\xampp\\htdocs\\', '/', $book["pdf_id"]['pdf_file']);
-                        }
+                            $imageUrl = preg_replace('/^.*?(?=public)/', '../', $book["pdf_id"]['img']);
+                            $pdfUrl = preg_replace('/^.*?(?=public)/', '../', $book["pdf_id"]['pdf_file']);
+
+                            $today = new DateTime();
+                            $end = new DateTime($book['access_end_date']);
+
+                            // Calculate the difference
+                            $interval = $today->diff($end);
                         ?>
                         <li class="book">
                             <div>
@@ -72,15 +73,15 @@ unset($_SESSION['err']);
                                 </div>
                             </div>
 
-                            <p class="daysLeft">Access due: <?= htmlspecialchars($book['access_end_date']); ?></p>
+                            <p class="daysLeft">Access due: <?= htmlspecialchars($book['access_end_date']); ?> (<?= htmlspecialchars($interval->days);?> days left)</p>
                             <div class="buttons">
                                 <div class="button">
-                                    <a class="pathPDF" href="/Fmi_web_php_books/handlers/verifyPdfHandler.php?pdfPath=<?= htmlspecialchars($pdfUrl); ?>" target="_blank">Read
+                                    <a class="pathPDF" href="../handlers/verifyPdfHandler.php?pdfPath=<?= htmlspecialchars($pdfUrl); ?>" target="_blank">Read
                                         PDF</a>
                                 </div>
                                 <div class='finishBook button'>
                                     <a class='pathPDF'
-                                        href="/Fmi_web_php_books/handlers/finishHandler.php?requestId=<?= htmlspecialchars($book["user_pdf_id"]); ?>">Finish</a>
+                                        href=" ../handlers/finishHandler.php?requestId=<?= htmlspecialchars($book["user_pdf_id"]); ?>">Finish</a>
                                 </div>
                             </div>
                         </li>
@@ -92,7 +93,7 @@ unset($_SESSION['err']);
         </ul>
     </main>
 
-    <script src="/Fmi_web_php_books/public/js/activeBooks.js"></script>
+    <script src=" ../public/js/activeBooks.js"></script>
 </body>
 
 </html>

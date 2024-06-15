@@ -4,7 +4,7 @@ session_start();
 // Check if the user is logged in
 if (!isset($_SESSION['user_id'])) {
     // Redirect to login page if not logged in
-    header("Location: /Fmi_web_php_books/views/login.php");
+    header("Location:  ../views/login.php");
     exit();
 }
 
@@ -26,9 +26,9 @@ unset($_SESSION['err']);
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Requests</title>
-    <link rel="stylesheet" href="/Fmi_web_php_books/public/css/home.css" />
-    <link rel="stylesheet" href="/Fmi_web_php_books/public/css/shared.css" />
-    <link rel="stylesheet" href="/Fmi_web_php_books/public/css/uploads.css" />
+    <link rel="stylesheet" href=" ../public/css/home.css" />
+    <link rel="stylesheet" href=" ../public/css/shared.css" />
+    <link rel="stylesheet" href=" ../public/css/uploads.css" />
 </head>
 
 <body>
@@ -36,13 +36,13 @@ unset($_SESSION['err']);
     <div class="header-container">
         <h1>My PDF Library</h1>
         <ul class="header-links">
-            <li><a href="/Fmi_web_php_books/handlers/activeBooksHandler.php">Active Books</a></li>
-            <li><a href="/Fmi_web_php_books/handlers/myUploadsHandler.php">My Uploads</a></li>
-            <li><a href="/Fmi_web_php_books/views/addPdf.php">Add PDF</a></li>
-            <li><a href="/Fmi_web_php_books/handlers/requestUploadHandler.php">Requests</a></li>
+            <li><a href=" ../handlers/activeBooksHandler.php">Active Books</a></li>
+            <li><a href=" ../handlers/myUploadsHandler.php">My Uploads</a></li>
+            <li><a href=" ../views/addPdf.php">Add PDF</a></li>
+            <li><a href=" ../handlers/requestUploadHandler.php">Requests</a></li>
             <li><a style="text-decoration: underline;" href="#">Guest requests</a></li>
-            <li><a href="/Fmi_web_php_books/handlers/statisticsHandlerHomePage.php">Home</a></li>
-            <li><a href="/Fmi_web_php_books/index.php">Logout</a></li>
+            <li><a href=" ../handlers/statisticsHandlerHomePage.php">Home</a></li>
+            <li><a href=" ../index.php">Logout</a></li>
         </ul>
     </div>
     <main>
@@ -64,11 +64,11 @@ unset($_SESSION['err']);
                             <div class='button'>
                                 <!-- Correct the href attribute by echoing and encoding the URL parameter -->
                                 <a class='pathPDF'
-                                    href="/Fmi_web_php_books/handlers/acceptGuestsRequestHandler.php?requestId=<?= urlencode($guestsRequests[$i]['id']); ?>">Approve</a>
+                                    href=" ../handlers/acceptGuestsRequestHandler.php?requestId=<?= urlencode($guestsRequests[$i]['id']); ?>">Approve</a>
                             </div>
                             <div class='button decline'>
                                 <a class='pathPDF'
-                                    href="/Fmi_web_php_books/handlers/declineGuestsRequestsHandler.php?requestId=<?= urlencode($guestsRequests[$i]['id']); ?>">Decline</a>
+                                    href=" ../handlers/declineGuestsRequestsHandler.php?requestId=<?= urlencode($guestsRequests[$i]['id']); ?>">Decline</a>
                             </div>
                         </div>
                     </li>

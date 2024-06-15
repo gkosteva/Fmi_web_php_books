@@ -2,7 +2,7 @@
 namespace repositories;
 
 require_once __DIR__ . '/repository.php';
-require_once __DIR__ . '/../../data/models/pdf.php';
+require_once __DIR__ . '/../models/pdf.php';
 
 
 use models\PDF;

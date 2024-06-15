@@ -2,12 +2,12 @@
 session_start();
 
 require_once __DIR__ . '/../data/repositories/pdfRepository.php';
-require_once __DIR__ . '/../common/httpHelpers.php';
+require_once __DIR__ . '../../common/httpHelpers.php';
 
 use repositories\PDFRepository;
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: /Fmi_web_php_books/views/login.php");
+    header("Location: ../views/login.php");
     exit();
 }
 

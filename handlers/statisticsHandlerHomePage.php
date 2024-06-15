@@ -2,7 +2,7 @@
 session_start();
 
 require_once __DIR__ . '/../data/repositories/pdfRepository.php';
-require_once __DIR__ . '/../common/httpHelpers.php';
+require_once __DIR__ . '../../common/httpHelpers.php';
 
 use repositories\PDFRepository;
 

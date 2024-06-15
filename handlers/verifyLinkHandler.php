@@ -35,21 +35,14 @@ if ($currentTimeInteger > $expirationTimeInteger) {
     $currentPdfFromPdfRepo = $pdfRepo->getPDFById($pdfId);
     $currentCount = $currentPdfFromPdfRepo["users_allowed_count"] - 1;
     $pdfRepo->update($pdfId, $currentCount, "users_allowed_count");
-    header("Location: /Fmi_web_php_books/views/expiredLink.php");
+    header("Location: ../views/expiredLink.php");
 } else {
-    $pdfUrl;
-    if (substr($pdfPath, 0, strlen('/Applications/XAMPP/xamppfiles/htdocs/')) === '/Applications/XAMPP/xamppfiles/htdocs/') {
-        $pdfUrl = str_replace('/Applications/XAMPP/xamppfiles/htdocs/', '/', $pdfPath);
-    } else {
-        $pdfUrl = str_replace('C:\\xampp\\htdocs\\', '/', $pdfPath);
-    }
+    $pdfUrl = preg_replace('/^.*?(?=public)/', '/', $pdfPath);
+
     $expirationToken = bin2hex(random_bytes(16));
     $_SESSION['pdf_tokens'][$expirationToken] = $pdfUrl;
-    $maskedUrl = "http://localhost/Fmi_web_php_books/handlers/servePdfHandler.php?token=$expirationToken";
+    $maskedUrl = "servePdfHandler.php?token=$expirationToken";
     header("Location: $maskedUrl");
     exit();
-    // $fullUrl = "http://localhost" . $pdfUrl;
-
-    // header("Location: $fullUrl");
 }
 
