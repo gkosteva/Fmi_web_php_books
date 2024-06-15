@@ -18,7 +18,7 @@ use PHPMailer\PHPMailer\Exception;
 
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: /Fmi_web_php_books/views/login.php");
+    header("Location: ../views/login.php");
     exit();
 }
 
@@ -36,7 +36,7 @@ if (isset($_GET['requestId'])) {
     $pdfName = $pdf['title'];
 
     if (!$pdf) {
-        header("Location: /Fmi_web_php_books/handlers/guestRrequestUploadHandler.php");
+        header("Location:  guestRrequestUploadHandler.php");
     }
 
     $mail = new PHPMailer(true);
@@ -66,10 +66,10 @@ if (isset($_GET['requestId'])) {
     }
     $statusUpdate=$requestRepo->updateStatus($requestId, "declined");
 
-    header("Location: /Fmi_web_php_books/handlers/guestRequestUploadHandler.php");
+    header("Location:  guestRequestUploadHandler.php");
     exit();
 } else {
-    header("Location: /Fmi_web_php_books/handlers/sguestRequestUploadHandler.php");
+    header("Location:  guestRequestUploadHandler.php");
     exit();
 }
 

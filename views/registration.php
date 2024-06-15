@@ -11,13 +11,13 @@ unset($_SESSION['form_data']);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Form</title>
-    <link rel="stylesheet" href="/Fmi_web_php_books/public/css/registration.css">
+    <link rel="stylesheet" href="../public/css/registration.css">
 </head>
 <body>
     <div class="form-container">
         <h2>Register</h2>
         <div id="errorMessage" class="error-message" data-error="<?php echo htmlspecialchars($errorMessage); ?>" style="display: none;"></div>
-        <form id="registrationForm" action="/Fmi_web_php_books/handlers/registrationHandler.php" method="post">
+        <form id="registrationForm" action="../handlers/registrationHandler.php" method="post">
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" value="<?php htmlspecialchars($formData['username']); ?>" required>
@@ -40,9 +40,9 @@ unset($_SESSION['form_data']);
             <button type="submit">Register</button>
         </form>
         <div class="register-link">
-            <p>You already have an account? <a href="/Fmi_web_php_books/views/login.php">Login here</a></p>
+            <p>You already have an account? <a href="login.php">Login here</a></p>
         </div>
     </div>
-    <script src="/Fmi_web_php_books/public/js/loginAndRegistrationErrorHandling.js"></script>
+    <script src="../public/js/loginAndRegistrationErrorHandling.js"></script>
 </body>
 </html>

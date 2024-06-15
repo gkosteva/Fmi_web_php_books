@@ -5,7 +5,7 @@ namespace repositories;
 use models\Token;
 
 require_once __DIR__ . '/repository.php';
-require_once __DIR__ . '/../../data/models/token.php';
+require_once __DIR__ . '/../models/token.php';
 
 class SendEmailRepository extends Repository
 {

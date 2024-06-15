@@ -2,7 +2,7 @@
 
 require_once __DIR__ . '/../data/repositories/userRepository.php';
 require_once __DIR__ . '/../data/models/user.php';
-require_once __DIR__ . '/../common/httpHelpers.php';
+require_once __DIR__ . '../../common/httpHelpers.php';
 
 use models\User;
 use repositories\UsersRepository;
@@ -24,31 +24,31 @@ $_SESSION['form_data'] = [
 // Validations
 if (empty($email) || empty($password) || empty($username) || empty($repeat_password)) {
     $_SESSION['error'] = "Моля попълнете всички полета.";
-    header("Location: /Fmi_web_php_books/views/registration.php");
+    header("Location: ../views/registration.php");
     exit();
 }
 
 if (strlen($password) < 6) {
     $_SESSION['error'] = "Паролата трябва да е поне 6 символа.";
-    header("Location: /Fmi_web_php_books/views/registration.php");
+    header("Location: ../views/registration.php");
     exit();
 }
 
 if (!preg_match('/[A-Z]/', $password)) {
     $_SESSION['error'] = "Паролата трябва да съдържа поне една главна буква.";
-    header("Location: /Fmi_web_php_books/views/registration.php");
+    header("Location: ../views/registration.php");
     exit();
 }
 
 if (!preg_match('/[a-z]/', $password)) {
     $_SESSION['error'] = "Паролата трябва да съдържа поне една малка буква.";
-    header("Location: /Fmi_web_php_books/views/registration.php");
+    header("Location: ../views/registration.php");
     exit();
 }
 
 if ($password !== $repeat_password) {
     $_SESSION['error'] = "Паролите трябва да съвпадат.";
-    header("Location: /Fmi_web_php_books/views/registration.php");
+    header("Location: ../views/registration.php");
     exit();
 }
 
@@ -59,13 +59,13 @@ $user_service = new UsersRepository();
 
 if($user_service->getByUsername($username)){
     $_SESSION['error'] = "Това потребителско име е заето. Моля въведете друго потребителско име.";
-    header("Location: /Fmi_web_php_books/views/registration.php");
+    header("Location: ../views/registration.php");
     exit();
 }
 
 if ($user_service->getByEmail($email)) {
     $_SESSION['error'] = "Този имейл вече съществуава. Моля въведете друг имейл.";
-    header("Location: /Fmi_web_php_books/views/registration.php");
+    header("Location: ../views/registration.php");
     exit();
 }
 
@@ -77,6 +77,6 @@ if ($is_successful) {
     redirect('../index.php');
 } else {
     $_SESSION['error'] = "Грешка по време на регистрацията. Опитай пак!";
-    header("Location: /Fmi_web_php_books/views/registration.php");
+    header("Location: ../views/registration.php");
     exit();
 }

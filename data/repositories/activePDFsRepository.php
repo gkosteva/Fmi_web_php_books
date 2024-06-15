@@ -4,8 +4,8 @@ namespace repositories;
 
 
 require_once __DIR__ . '/repository.php';
-require_once __DIR__ . '/../../data/models/activePDF.php';
 require_once __DIR__ . '/../../data/models/pdf.php';
+
 
 use models\ActivePDF;
 
@@ -14,8 +14,7 @@ class ActiveBooksRepository extends Repository
 
     public function __construct()
     {
-        parent::__construct('User_PDFs');
-
+        parent::__construct('user_pdfs');
     }
 
     public function getActiveBooksByUserId($userId)
@@ -56,6 +55,5 @@ class ActiveBooksRepository extends Repository
             "access_end_date" => $pdf->expiresAt,
         ]);
     }
-
 
 }

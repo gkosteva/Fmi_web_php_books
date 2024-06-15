@@ -29,7 +29,7 @@ $exist = $requestRepo->findRequestPDFExisting($pdfId, $userIdRequested, $ownerId
 
 if ($exist != null) {
     $_SESSION["err"] = "Already requested!";
-    header("Location: /Fmi_web_php_books/views/home.php");
+    header("Location: ../views/home.php");
     exit();
 }
 
@@ -37,7 +37,7 @@ $pdf = $pdfRepository->getPDFById($pdfId);
 
 if ($pdf["users_allowed_count"] >= $pdf["max_users_allowed"]) {
     $_SESSION["err"] = "Try later, full capacity";
-    header("Location: /Fmi_web_php_books/views/home.php");
+    header("Location: ../views/home.php");
     exit();
 }
 $date = date("Y-m-d");
@@ -47,5 +47,5 @@ $request = $requestRepo->addRequest($createRequest);
 $title = $pdf["title"];
 $_SESSION["msg"] = "Successfully requested pdf: $title!";
 
-header("Location: /Fmi_web_php_books/views/home.php");
+header("Location: ../views/home.php");
 exit();

@@ -3,11 +3,11 @@
 session_start();
 $token=$_GET['token'];
 if(!$token){
-    header("Location: /Fmi_web_php_books/views/expiredLink.php");
+    header("Location: ../views/expiredLink.php");
     exit();
 }
 if(!isset($_SESSION['pdf_tokens'][$token])){
-    header("Location: /Fmi_web_php_books/views/expiredLink.php");
+    header("Location: ../views/expiredLink.php");
     exit();
 }
 
@@ -27,6 +27,6 @@ if (file_exists($file)) {
     readfile($file);
     exit();
 } else {
-    header("Location: /Fmi_web_php_books/views/expiredLink.php");
+    header("Location: ../views/expiredLink.php");
     exit();
 }

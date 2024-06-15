@@ -13,7 +13,7 @@ use repositories\RequestRepository;
 use repositories\PDFRepository;
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: /Fmi_web_php_books/views/login.php");
+    header("Location: ../views/login.php");
     exit();
 }
 
@@ -26,21 +26,21 @@ if (isset($_GET['requestId'])) {
     $pdf = $pdfRepository->getPDFById($request["pdf_id"]);
     if (!$pdf) {
         $_SESSION["err"] = "Error approving";
-        header("Location: /Fmi_web_php_books/handlers/requestUploadHandler.php");
+        header("Location:  requestUploadHandler.php");
     }
 
     $deleted = $requestRepo->deleteRequest("request_id", $requestId);
     if (!$deleted) {
         $_SESSION["err"] = "Error";
-        header("Location: /Fmi_web_php_books/handlers/requestUploadHandler.php");
+        header("Location:  requestUploadHandler.php");
         exit();
     }
     $_SESSION["msg"] = "Pdf declined!";
-    header("Location: /Fmi_web_php_books/handlers/requestUploadHandler.php");
+    header("Location:  requestUploadHandler.php");
     exit();
 } else {
     $_SESSION['err'] = "No request ID provided.";
-    header("Location: /Fmi_web_php_books/handlers/requestUploadHandler.php");
+    header("Location:  requestUploadHandler.php");
     exit();
 }
 

@@ -13,7 +13,7 @@ use repositories\ActiveBooksRepository;
 use repositories\PDFRepository;
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: /Fmi_web_php_books/views/login.php");
+    header("Location: ../views/login.php");
     exit();
 }
 
@@ -27,13 +27,13 @@ if (isset($_GET['requestId'])) {
 
     if (!$pdf) {
         $_SESSION["err"] = "Error approving";
-        header("Location: /Fmi_web_php_books/handlers/activeBooksHandler.php");
+        header("Location:  activeBooksHandler.php");
     }
 
     $deleted = $activeRepository->delete("user_pdf_id", $requestId);
     if (!$deleted) {
         $_SESSION["err"] = "Error";
-        header("Location: /Fmi_web_php_books/handlers/activeBooksHandler.php");
+        header("Location:  activeBooksHandler.php");
         exit();
     }
     $currentPdfFromPdfRepo = $pdfRepo->getPDFById($pdfId);
@@ -41,11 +41,11 @@ if (isset($_GET['requestId'])) {
     $pdfRepo->update($pdfId, $currentCount, "users_allowed_count");
 
     $_SESSION["msg"] = "Succesfully finished!";
-    header("Location: /Fmi_web_php_books/handlers/activeBooksHandler.php");
+    header("Location:  activeBooksHandler.php");
     exit();
 } else {
     $_SESSION['err'] = "Error finishing pdf!";
-    header("Location: /Fmi_web_php_books/handlers/activeBooksHandler.php");
+    header("Location:  activeBooksHandler.php");
     exit();
 }
 

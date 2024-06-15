@@ -5,7 +5,7 @@ namespace repositories;
 use models\User;
 
 require_once __DIR__ . '/repository.php';
-require_once __DIR__ . '/../../data/models/user.php';
+require_once __DIR__ . '/../models/user.php';
 
 class UsersRepository extends Repository
 {

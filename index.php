@@ -54,8 +54,8 @@ unset($_SESSION['err']);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     <link rel="stylesheet" href="public/css/shared.css">
-    <link rel="stylesheet" href="/Fmi_web_php_books/public/css/home.css">
-    <link rel="stylesheet" href="/Fmi_web_php_books/public/css/uploads.css">
+    <link rel="stylesheet" href="public/css/home.css">
+    <link rel="stylesheet" href="public/css/uploads.css">
 </head>
 
 <body>
@@ -83,11 +83,7 @@ unset($_SESSION['err']);
             <?php if (!empty($updated_pdfs)): ?>
                 <?php foreach ($updated_pdfs as $pdf): ?>
                     <?php
-                    if (substr($pdf["img"], 0, strlen('/Applications/XAMPP/xamppfiles/htdocs/')) === '/Applications/XAMPP/xamppfiles/htdocs/') {
-                        $imageUrl = str_replace('/Applications/XAMPP/xamppfiles/htdocs/', '/', $pdf['img']);
-                    } else {
-                        $imageUrl = str_replace('C:\\xampp\\htdocs\\', '/', $pdf['img']);
-                    }
+                   $imageUrl = preg_replace('/^.*?(?=public)/', '', $pdf['img']);
                     ?>
                     <li class="book">
                         <img src="<?= htmlspecialchars($imageUrl); ?>"
