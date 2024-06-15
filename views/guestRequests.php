@@ -55,24 +55,24 @@ unset($_SESSION['err']);
         <h1>Pending guests' requests</h1>
         <ul id="book-list">
             <?php if (count($guestsRequests) > 0): ?>
-                <?php for ($i = 0; $i < count($guestsRequests); $i++): ?>
+                <?php foreach($guestsRequests as $request): ?>
                     <li class='book'>
                         <!-- Ensure to echo out the contents properly -->
-                        <h3>Title: <?= htmlspecialchars($guestsRequests[$i]["pdf_id"]['title']); ?></h3>
-                        <p>Requested by: <?= htmlspecialchars($guestsRequests[$i]["user_email"]); ?></p>
+                        <h3>Title: <?= htmlspecialchars($request['title_pdf']); ?></h3>
+                        <p>Requested by: <?= htmlspecialchars($request["user_email"]); ?></p>
                         <div class='buttons'>
                             <div class='button'>
                                 <!-- Correct the href attribute by echoing and encoding the URL parameter -->
                                 <a class='pathPDF'
-                                    href=" ../handlers/acceptGuestsRequestHandler.php?requestId=<?= urlencode($guestsRequests[$i]['id']); ?>">Approve</a>
+                                    href=" ../handlers/acceptGuestsRequestHandler.php?requestId=<?= urlencode($request['id']); ?>">Approve</a>
                             </div>
                             <div class='button decline'>
                                 <a class='pathPDF'
-                                    href=" ../handlers/declineGuestsRequestsHandler.php?requestId=<?= urlencode($guestsRequests[$i]['id']); ?>">Decline</a>
+                                    href=" ../handlers/declineGuestsRequestsHandler.php?requestId=<?= urlencode($request['id']); ?>">Decline</a>
                             </div>
                         </div>
                     </li>
-                <?php endfor; ?>
+                <?php endforeach; ?>
             <?php else: ?>
                 <p id="noBooks">No pending requests</p>
             <?php endif; ?>

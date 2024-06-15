@@ -38,7 +38,6 @@ if ($currentTimeInteger > $expirationTimeInteger) {
     header("Location: ../views/expiredLink.php");
 } else {
     $pdfUrl = preg_replace('/^.*?(?=public)/', '/', $pdfPath);
-
     $expirationToken = bin2hex(random_bytes(16));
     $_SESSION['pdf_tokens'][$expirationToken] = $pdfUrl;
     $maskedUrl = "servePdfHandler.php?token=$expirationToken";

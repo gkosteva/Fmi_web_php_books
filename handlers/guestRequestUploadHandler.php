@@ -43,11 +43,14 @@ if (!$onlyPendingRequests) {
 }
 
 $pdfRepo = new PDFRepository();
+$output=array();
 
 foreach ($onlyPendingRequests as &$book) {
-    $book["pdf_id"] = $pdfRepo->getPDFById($book["pdf_id"]);
+    $current = $pdfRepo->getPDFById($book["pdf_id"]);
+    $book["title_pdf"] = $current["title"];
+    $output[] = $book;
 }
 
-$_SESSION['guestsRequests'] = $onlyPendingRequests;
+$_SESSION['guestsRequests'] = $output;
 header("Location: ../views/guestRequests.php");
 exit();

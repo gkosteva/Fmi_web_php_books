@@ -14,7 +14,7 @@ if(!isset($_SESSION['pdf_tokens'][$token])){
 $pdfPath = $_SESSION['pdf_tokens'][$token];
 unset($_SESSION['pdf_tokens'][$token]); 
 
-$file = __DIR__ . '../public/uploads/pdfs/' . basename($pdfPath);
+$file = __DIR__ . '/../public/uploads/pdfs/' . basename($pdfPath);
 
 if (file_exists($file)) {
     header('Content-Description: File Transfer');

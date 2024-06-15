@@ -4,9 +4,9 @@ session_start();
 require_once __DIR__ . '/../data/repositories/unregisteredRequestsRepository.php';
 require_once __DIR__ . '/../data/repositories/pdfRepository.php';
 require_once __DIR__ . '/../data/models/unregisterRequests.php';
-require_once __DIR__ . '../PHPMailer/Exception.php';
-require_once __DIR__ . '../PHPMailer/SMTP.php';
-require_once __DIR__ . '../PHPMailer/PHPMailer.php';
+require_once __DIR__ . '/../PHPMailer/Exception.php';
+require_once __DIR__ . '/../PHPMailer/SMTP.php';
+require_once __DIR__ . '/../PHPMailer/PHPMailer.php';
 require_once __DIR__ . '/../data/models/token.php';
 require_once __DIR__ . '/../data/repositories/sendEmailsRepository.php';
 
@@ -35,6 +35,13 @@ function createExpirationTime($active_days, $format = 'Y-m-d H:i:s')
     $current_time = new DateTime();
     $current_time->modify("+$active_days days");
     return $current_time->format($format);
+}
+
+function getBaseUrl() {
+    $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+    $host = $_SERVER['HTTP_HOST'];
+    $path = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+    return $protocol . $host . $path . '/';
 }
 
 $tokenString = generateToken();
@@ -76,7 +83,8 @@ if (isset($_GET['requestId'])) {
 
     $mail = new PHPMailer(true);
 
-    $link = "verifyLinkHandler.php?token=$tokenString";
+    $baseUrl = getBaseUrl();
+    $link = $baseUrl."verifyLinkHandler.php?token=$tokenString";
 
     try {
         $mail->SMTPDebug = 0;

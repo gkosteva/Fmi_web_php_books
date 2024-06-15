@@ -1,18 +1,17 @@
 <?php
+
 namespace repositories;
 
-require_once __DIR__ . '/repository.php';
-require_once __DIR__ . '/../models/pdf.php';
-
-
 use models\PDF;
-use repositories\Repository;
+
+require_once __DIR__ . '/repository.php';
+require_once __DIR__ . '/../../data/models/pdf.php';
 
 class PDFRepository extends Repository
 {
     public function __construct()
     {
-        parent::__construct('PDFs');
+        parent::__construct('pdfs');
     }
 
     public function getPDFByDescr($descript)
@@ -41,42 +40,15 @@ class PDFRepository extends Repository
         return null;
     }
 
-    public function updatePDFCountUsers($id, $data, $column)
-    {
-        return $this->update(
-            $id,
-            $data,
-            $column
-        );
+    public function getPdfById(int $id){
+
+        return $this->filter(['id'=>$id])[0];
     }
 
-    public function getPDFById($id)
+    public function getPDFsByUserId(int $user_id): array
     {
-        $pdfs = $this->filter([
-            "id" => $id
-        ]);
-
-        if ($pdfs) {
-            return $pdfs[0];
-        }
-
-        return null;
+        return $this->filter(['owner' => $user_id]);
     }
-
-    public function getPDFsByUserId( $user_id)
-    {
-        return $this->filter([
-            "owner" => $user_id
-        ]);
-    }
-
-    public function searchByRegex($patern): array
-    {
-        $array = $this->searchPDFs($patern);
-        return $array;
-
-    }
-
 
     public function create(PDF $pdf)
     {
@@ -93,5 +65,4 @@ class PDFRepository extends Repository
             "owner" => $pdf->owner
         ]);
     }
-
 }

@@ -4,9 +4,9 @@ session_start();
 require_once __DIR__ . '/../data/repositories/unregisteredRequestsRepository.php';
 require_once __DIR__ . '/../data/repositories/pdfRepository.php';
 require_once __DIR__ . '/../data/models/unregisterRequests.php';
-require_once __DIR__ . '../PHPMailer/Exception.php';
-require_once __DIR__ . '../PHPMailer/SMTP.php';
-require_once __DIR__ . '../PHPMailer/PHPMailer.php';
+require_once __DIR__ . '/../PHPMailer/Exception.php';
+require_once __DIR__ . '/../PHPMailer/SMTP.php';
+require_once __DIR__ . '/../PHPMailer/PHPMailer.php';
 require_once __DIR__ . '/../data/models/token.php';
 require_once __DIR__ . '/../data/repositories/sendEmailsRepository.php';
 
@@ -69,7 +69,7 @@ if (isset($_GET['requestId'])) {
     header("Location:  guestRequestUploadHandler.php");
     exit();
 } else {
-    header("Location:  sguestRequestUploadHandler.php");
+    header("Location:  guestRequestUploadHandler.php");
     exit();
 }
 

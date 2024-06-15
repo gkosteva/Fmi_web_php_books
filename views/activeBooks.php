@@ -23,7 +23,7 @@ unset($_SESSION['err']);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Active Books</title>
     <link rel="stylesheet" href="../public/css/home.css">
-    <link rel="stylesheet" href=" ../public/css/shared.css">
+    <link rel="stylesheet" href="../public/css/shared.css">
     <link rel="stylesheet" href="../public/css/uploads.css">
 </head>
 
@@ -33,7 +33,7 @@ unset($_SESSION['err']);
         <ul class="header-links">
             <li><a style="text-decoration: underline;" href="#">Active Books</a></li>
             <li><a href=" ../handlers/myUploadsHandler.php">My Uploads</a></li>
-            <li><a href=" addPdf.php">Add PDF</a></li>
+            <li><a href="addPdf.php">Add PDF</a></li>
             <li><a href=" ../handlers/requestUploadHandler.php">Requests</a></li>
             <li><a href=" ../handlers/guestRequestUploadHandler.php">Guest requests</a></li>
             <li><a href=" ../handlers/statisticsHandlerHomePage.php">Home</a></li>

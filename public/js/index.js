@@ -1,9 +1,9 @@
 
 var requestPdfButtons = document.querySelectorAll('.request-pdf-button');
-requestPdfButtons.forEach(function(button) {
-    button.addEventListener('click', function() {
+requestPdfButtons.forEach(function (button) {
+    button.addEventListener('click', function () {
         var pdfName = this.parentNode.querySelector('.title').innerText.trim();
-        var authorName=this.parentNode.querySelector('.author').innerText.trim();
+        var authorName = this.parentNode.querySelector('.author').innerText.trim();
         console.log(authorName);
         openModal('modal', pdfName, authorName);
     });
@@ -27,11 +27,11 @@ function handleModal(pdfName, authorName) {
     var emailInput = document.getElementById('emailInput');
     var submitButton = document.getElementById('submitButton');
 
-    submitButton.addEventListener('click', function(event) {
+    submitButton.addEventListener('click', function (event) {
         event.preventDefault();
-        
-        var email = emailInput.value.trim(); 
-        
+
+        var email = emailInput.value.trim();
+
         if (email === '') {
             alert('Please enter your email address');
             return;
@@ -39,27 +39,36 @@ function handleModal(pdfName, authorName) {
         loadingIndicator.style.display = 'block';
 
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "../handlers/sendInitialEmailHandler.php", true); 
+        var origin = window.location.origin;
+        var pathname = window.location.pathname;
+        var basePath = pathname.substring(0, pathname.lastIndexOf('/') + 1);
+        var projectBaseUrl = origin + basePath;
+        console.log("project", projectBaseUrl);
+
+        var url = projectBaseUrl + "handlers/sendInitialEmailHandler.php";
+        console.log("Request URL: ", url);
+        xhr.open("POST", url, true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhr.onreadystatechange = function() {
+        xhr.onreadystatechange = function () {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 loadingIndicator.style.display = 'none';
                 if (xhr.status === 200) {
-                    console.log(xhr.responseText); 
+                    console.log(xhr.responseText);
                     //alert("Email sent successfully!"); 
-                    closeModal('modal'); 
+                    closeModal('modal');
                     this.parentNode.classList.add('grayed-out');
                 } else {
-                    console.error(xhr.statusText); 
-                    alert("Failed to send email. Please try again."); 
+                    console.error(xhr.statusText);
+                    alert("Failed to send email. Please try again.");
                 }
+                console.log(xhr.status);
             }
         };
         var cleanedPdfName = pdfName.replace('Title:', '').trim();
         var cleanedAuthorName = authorName.replace('Author:', '').trim();
         var formData = 'email=' + encodeURIComponent(email) +
-                   '&pdfName=' + encodeURIComponent(cleanedPdfName) +
-                   '&authorName=' + encodeURIComponent(cleanedAuthorName);
+            '&pdfName=' + encodeURIComponent(cleanedPdfName) +
+            '&authorName=' + encodeURIComponent(cleanedAuthorName);
         xhr.send(formData);
     });
 }

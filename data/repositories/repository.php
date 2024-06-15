@@ -2,7 +2,7 @@
 
 namespace repositories;
 
-require __DIR__ . '..//../database.php';
+require __DIR__ . '../../database.php';
 
 use Database;
 use PDO;
