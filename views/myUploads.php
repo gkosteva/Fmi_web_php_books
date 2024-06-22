@@ -71,9 +71,6 @@ unset($_SESSION['err']);
                                     <div class="button">
                                         <a href="<?= htmlspecialchars($pdfUrl) ?>" target="_blank" class="pathPDF">View PDF</a>
                                     </div>
-                                    <div class="button">
-                                        <a href="" class="pathPDF">Share</a>
-                                    </div>
                                 </div>
                             </li>
                     <?php endforeach; ?>
